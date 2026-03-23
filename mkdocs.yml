@@ -1,0 +1,23 @@
+site_name: Documentation Portal | Sheethal U
+theme:
+  name: material
+  palette:
+    scheme: slate
+    primary: deep purple
+  features:
+    - navigation.tabs
+    - content.code.copy
+
+nav:
+  - Welcome: index.md
+  - Project Overview: project-intro.md
+  - API Reference:
+    - Authentication: auth/login.md
+    - Search API: search/search-loans.md
+    - Sorting: sorting/sorting.md
+    - Dropdowns: dropdown/dropdowns.md
+    - Error Codes: Errors/errors.md
+  - Resources & Downloads: resources.md
+
+markdown_extensions:
+  - attr_list
