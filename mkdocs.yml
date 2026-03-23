@@ -1,15 +1,6 @@
 site_name: Documentation Portal | Sheethal U
 theme:
   name: material
-  palette:
-    scheme: slate
-    primary: deep purple
-  features:
-    - navigation.tabs
-    - content.code.copy
-
-theme:
-  name: material
   palette: 
     - media: "(prefers-color-scheme: light)"
       scheme: default
@@ -25,6 +16,9 @@ theme:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
+  features:
+    - navigation.tabs
+    - content.code.copy
 
 nav:
   - Welcome: index.md
