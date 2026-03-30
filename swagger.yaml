@@ -1,0 +1,150 @@
+openapi: 3.0.0
+info:
+  title: Search loan application
+  version: 1.0.0
+  description: Search filter to search, sort and retrieve the loan application.
+paths:
+  /auth/login:
+    post:
+      summary: User Authentication
+      description: Auth uses JSON Web Tokens (JWT) sent in the Authorization header: `Authorization: Bearer <access_token>.`
+      requestBody:
+      required: true
+      content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthRequest'
+      responses:
+      required: true
+      content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'          
+  /search-loans:
+    post:
+      summary: Search and sort loan applications
+      description: This API will fetch the loan application details that match the provided criteria or filters applied and sort the loan application details in ascending and descending order.
+      parameters:
+      - name: sortBy
+        in: query
+        description: "Choose the field to sort by."
+        schema:
+          type: string
+          enum: [submissionDate, amount, customerName]
+      - name: sortOrder
+        in: query
+        description: "Choose the direction (asc = low to high, desc = high to low)."
+        schema:
+          type: string
+          enum: [asc, desc]
+          default: desc  
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SearchRequest'
+      responses:
+        '200':
+          description: "Search successful - returns list of applications"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse' 
+        '400':
+          description: "Bad Request - Validation Error"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: "No Record Found (Valid IDs + Invalid Loan Status)"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'       
+components:
+  schemas:
+    AuthRequest:
+      type: object
+      required:
+        - username
+        - password
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    AuthResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        token:
+          type: string
+        expiresIn:
+          type: number
+        issuedAt:
+          type: string
+        roles:
+          type: array
+          items:
+            type: string
+    SearchRequest:
+      type: object
+      required:
+        - applicationYear  
+      properties:
+        acknowledgmentNumber:
+          type: string
+        loanStatus:
+          type: string
+          enum: [Approved, Pending, Rejected]
+        referenceNumber:
+          type: string 
+        applicationYear:
+          type: integer
+          default: 2026  # pre-select 2026
+          enum: [2024, 2025, 2026]
+    SearchResponse:
+      type: object
+      properties:
+        status:
+          type: string
+        applications:
+          type: array
+          items:
+            $ref: '#/components/schemas/ApplicationRecord' 
+    ApplicationRecord:
+      type: object
+      properties:
+        applicationId: 
+          type: string
+        customerName:
+          type: string
+        loanType: 
+          type: string
+          enum: [Home Loan, Car Loan, Personal Loan]
+        status:
+          type: string
+        amount:
+          type: number 
+        submittedBy:
+          type: string 
+        submissionDate: 
+          type: string  
+          format: date
+        branchCode:
+          type: string 
+    ErrorResponse:
+      type: object
+      properties: 
+        status:
+          type: string
+        errorCode:
+          type: string
+        message:
+          type: string
+            
+
+                     

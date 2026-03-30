@@ -6,6 +6,8 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 - Short one-line description
 - Positive and negative cases for: Request type, Request body, Response body, Status code
 
+swagger-ui: "swagger.yaml"
+
 ## SORTING – SCHEMAS
 
 **Model: Sorting Request**
@@ -69,7 +71,7 @@ ApplicationRecord:
 - **URL:** `/search-loans?sortBy=submissionDate&sortOrder=desc`
 - **URL:** `/search-loans?sortBy=submissionDate&sortOrder=asc`
 - **Method:** `POST`  
-- **Description:** This API will sort the loan application details in descending order. Positive case returns 200 OK.
+- **Description:** This API will sort the loan application details in ascending and descending order. Positive case returns 200 OK.
 
 **Sorting - Descending**
 

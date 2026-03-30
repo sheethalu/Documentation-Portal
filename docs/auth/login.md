@@ -6,6 +6,8 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 - Short one-line description
 - Positive and negative cases for: Request type, Request body, Response body, Status code
 
+swagger-ui: "swagger.yaml"
+
 ## AUTHENTICATION API – SCHEMAS
 
 **Model: AuthRequest**
@@ -26,10 +28,10 @@ password: `string (required)`
 |Field	  | Type	| Description  |
 |---------|---------|--------------|
 | status  |	string  |	Response status, e.g., "success". |
-| token	  |string (JWT)	| Access token used for authentication.|
+| token	  | string (JWT)	| Access token used for authentication.|
 | expiresIn |	number |	Expiration time in seconds.        |
-|issuedAt	|string (ISO8601)  |	Timestamp when token was issued.|
-|roles	|array[string]	| The user’s roles / permissions.|
+| issuedAt	| string (ISO8601)  |	Timestamp when token was issued.|
+| roles	| array[string]	| The user’s roles / permissions.|
 
 **AuthResponse**
 ```

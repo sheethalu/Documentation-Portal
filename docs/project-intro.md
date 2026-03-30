@@ -24,7 +24,8 @@ Auth uses JSON Web Tokens (JWT) sent in the Authorization header: `Authorization
 - Two dropdowns (Loan Status, Application Year).
 - **Loan Status**: one of `Approved`,`Pending`, `Rejected`. 
 - Application Year is auto-selected to current year (2025) and a mandatory field. 
-- **Application Year**: **(Required)** Allowed: `2023`, `2024`, `2025`. Default UI value: `2025`. 
+- **Application Year**: **(Required)** Allowed: `2023`, `2024`, `2025`. Default UI value: `2025`.
+- **Sorting**: Results can be sorted in Ascending or Descending order. Primary sort fields include Submission Date, Amount, and Customer Name. 
 
 ### Search results table fields:
 
