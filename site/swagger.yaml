@@ -3,66 +3,66 @@ info:
   title: Search loan application
   version: 1.0.0
   description: Search filter to search, sort and retrieve the loan application.
-paths:
-  /auth/login:
-    post:
-      summary: User Authentication
-      description: Auth uses JSON Web Tokens (JWT) sent in the Authorization header `Authorization Bearer <access_token>.`
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AuthRequest'
-      responses:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AuthResponse'          
-  /search-loans:
-    post:
-      summary: Search and sort loan applications
-      description: This API will fetch the loan application details that match the provided criteria or filters applied and sort the loan application details in ascending and descending order.
-      parameters:
-      - name: sortBy
-        in: query
-        description: "Choose the field to sort by."
-        schema:
-          type: string
-          enum: [submissionDate, amount, customerName]
-      - name: sortOrder
-        in: query
-        description: "Choose the direction (asc = low to high, desc = high to low)."
-        schema:
-          type: string
-          enum: [asc, desc]
-          default: desc  
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/SearchRequest'
-      responses:
-        '200':
-          description: "Search successful - returns list of applications"
+  paths:
+    /auth/login:
+      post:
+        summary: User Authentication
+        description: Auth uses JSON Web Tokens (JWT) sent in the Authorization header: `Authorization Bearer: <access_token>.`
+        requestBody:
+          required: true
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchResponse' 
-        '400':
-          description: "Bad Request - Validation Error"
+                $ref: '#/components/schemas/AuthRequest'
+        responses:
+          required: true
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorResponse'
-        '404':
-          description: "No Record Found (Valid IDs + Invalid Loan Status)"
+                $ref: '#/components/schemas/AuthResponse'          
+    /search-loans:
+      post:
+        summary: Search and sort loan applications
+        description: This API will fetch the loan application details that match the provided criteria or filters applied and sort the loan application details in ascending and descending order.
+        parameters:
+        - name: sortBy
+          in: query
+          description: "Choose the field to sort by."
+          schema:
+            type: string
+            enum: [submissionDate, amount, customerName]
+        - name: sortOrder
+          in: query
+          description: "Choose the direction (asc = low to high, desc = high to low)."
+          schema:
+            type: string
+            enum: [asc, desc]
+            default: desc  
+        requestBody:
+          required: true
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchResponse'       
+                $ref: '#/components/schemas/SearchRequest'
+        responses:
+          '200':
+            description: "Search successful - returns list of applications"
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/SearchResponse' 
+          '400':
+            description: "Bad Request - Validation Error"
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/ErrorResponse'
+          '404':
+            description: "No Record Found (Valid IDs + Invalid Loan Status)"
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/SearchResponse'       
 components:
   schemas:
     AuthRequest:
