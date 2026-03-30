@@ -18,7 +18,7 @@ swagger-ui: "swagger.yaml"
 |referenceNumber	|string	|no	|1–15 alphanumeric, case-insensitive|
 |applicationId|string	|no	|1–15 alphanumeric, case-insensitive|
 |loanStatus|string| no|One of: Approved, Pending, Rejected|
-|applicationYear | number| yes | Allowed: 2023, 2024, 2025. Default: 2025|
+|applicationYear | number| yes | Allowed: 2024, 2025, 2026. Default: 2026|
 
 **Sorting Request**
 
@@ -26,7 +26,7 @@ acknowledgmentNumber: `string (1–15 alphanumeric)`
 referenceNumber: `string (1–15 alphanumeric)`  
 applicationId: `string (1–15 alphanumeric)`  
 loanStatus: `string (enum: Approved, Pending, Rejected)`  
-applicationYear: `number (required, enum: 2023 | 2024 | 2025; default=2025)`  
+applicationYear: `number (required, enum: 2024 | 2025 | 2026; default=2026)`  
 
 
 **Model: Sorting Response**
