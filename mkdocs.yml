@@ -1,12 +1,7 @@
 site_name: Documentation Portal | Sheethal U
 theme:
   name: material
-plugins:
-  - search
-  - swagger-ui-tag:
-      path_type:
-      
-palette: 
+  palette: 
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: teal
@@ -21,10 +16,15 @@ palette:
       toggle:
         icon: material/brightness-4
         name: Switch to light mode
-features:
+  features:
     - navigation.tabs
     - content.code.copy
 
+plugins:
+  - search
+  - swagger-ui-tag:
+      path_type:
+      
 nav:
   - Welcome: index.md
   - Project Overview: project-intro.md
