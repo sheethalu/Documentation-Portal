@@ -7,7 +7,7 @@ paths:
   /auth/login:
     post:
       summary: User Authentication
-      description: Auth uses JSON Web Tokens (JWT) sent in the Authorization header: `Authorization: Bearer <access_token>.`
+      description: Auth uses JSON Web Tokens (JWT) sent in the Authorization header `Authorization Bearer <access_token>.`
       requestBody:
         required: true
         content:
