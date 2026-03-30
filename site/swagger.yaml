@@ -9,17 +9,17 @@ paths:
       summary: User Authentication
       description: Auth uses JSON Web Tokens (JWT) sent in the Authorization header: `Authorization: Bearer <access_token>.`
       requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AuthRequest'
+      required: true
+      content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthRequest'
       responses:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AuthResponse'          
+      required: true
+      content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthResponse'          
   /search-loans:
     post:
       summary: Search and sort loan applications
