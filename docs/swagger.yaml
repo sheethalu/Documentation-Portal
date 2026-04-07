@@ -1,12 +1,9 @@
 openapi: 3.0.0
 info:
   title: Search loan application
-  version: 1.0.0
   description: Search filter to search, sort and retrieve the loan application.
-
-#servers:
-#  - url: https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/
-#    description: Demo Mock Server (Postman)
+  version: 1.0.0
+  
 
 paths:
   /auth/login:
