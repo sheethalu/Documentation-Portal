@@ -1,4 +1,5 @@
 site_name: Documentation Portal | Sheethal U
+site url: https://sheethalu.github.io/Documentation-Portal/
 theme:
   name: material
   palette: 
