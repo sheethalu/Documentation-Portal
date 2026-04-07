@@ -6,7 +6,7 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 - Short one-line description
 - Positive and negative cases for: Request type, Request body, Response body, Status code
 
-<swagger-ui src="./swagger.yaml" filter="Search"/>
+<swagger-ui src="https://sheethalu.github.io/Documentation-Portal/swagger.yaml" filter="Search">
 
 ## Search Api – SCHEMAS
 
