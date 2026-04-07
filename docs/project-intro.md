@@ -15,7 +15,7 @@ This API lets a loan officer search existing loan applications using simple sear
 
 Auth uses JSON Web Tokens (JWT) sent in the Authorization header: `Authorization: Bearer <access_token>.`
 
-## UI Expectations and Filters (Business Rules):
+## UI Expectations and Filters (Business Rules)
 
 - Three text inputs (Acknowledgment Number, Reference Number, Application Id).
 - **Acknowledgment Number**: 1–15 alphanumeric (case-insensitive). Anything else → *Invalid Acknowledgment Number*.  
@@ -27,16 +27,19 @@ Auth uses JSON Web Tokens (JWT) sent in the Authorization header: `Authorization
 - **Application Year**: **(Required)** Allowed: `2024`, `2025`, `2025`. Default UI value: `2026`.
 - **Sorting**: Results can be sorted in Ascending or Descending order. Primary sort fields include Submission Date, Amount, and Customer Name. 
 
-### Search results table fields:
+### Search results table fields
 
 | Application ID |  Customer Name | Loan Type| Status | Amount| Submitted By| Submission Date| Branch Code|
 |----------------|----------------|----------|--------|-------|-------------|----------------|-----------|
 |APPID2025XYZ001 | John Doe       |Home Loan |Approved|250000 | Officer A   |2025-01-20      |BR001      |   
 
-## Endpoints:
+## Endpoints
 
 **Login- Auth**
 - `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/auth/login`
 
 **Search loans**
 - `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans`
+
+**Dropdown options**
+- `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io//dropdown/filters`

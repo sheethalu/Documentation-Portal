@@ -4,11 +4,16 @@ info:
   version: 1.0.0
   description: Search filter to search, sort and retrieve the loan application.
 
+servers:
+  - url: https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/
+    description: Demo Mock Server (Postman)
+
 paths:
   /auth/login:
     post:
+      tags:
+      - Authentication
       summary: User Authentication
-      description: Auth uses JSON Web Tokens (JWT) sent in the Authorization header `Authorization Bearer <access_token>.`
       requestBody:
         required: true
         content:
@@ -17,25 +22,27 @@ paths:
               $ref: '#/components/schemas/AuthRequest'
       responses:
         '200':
-          description: "Search successful - returns list of applications"
+          description: "OK"
           content:
-          application/json:
+            application/json:
               schema:
                 $ref: '#/components/schemas/AuthResponse'          
   /search-loans:
     post:
+      tags:
+        - Search
+        - Sorting
       summary: Search and sort loan applications
-      description: This API will fetch the loan application details that match the provided criteria or filters applied and sort the loan application details in ascending and descending order.
       parameters:
         - name: sortBy
           in: query
-          description: "Choose the field to sort by."
+          description: "Select the field to sort by"
           schema:
             type: string
             enum: [submissionDate, amount, customerName]
         - name: sortOrder
           in: query
-          description: "Choose the direction (asc = low to high, desc = high to low)."
+          description: "Select asc = sort low to high, desc = sort high to low"
           schema:
             type: string
             enum: [asc, desc]
@@ -48,7 +55,7 @@ paths:
               $ref: '#/components/schemas/SearchRequest'
       responses:
         '200':
-          description: "Search successful - returns list of applications"
+          description: "Search successful - 200 OK"
           content:
             application/json:
               schema:
@@ -60,11 +67,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
         '404':
-          description: "No Record Found (Valid IDs + Invalid Loan Status)"
+          description: "No Record Found"
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchResponse'       
+                $ref: '#/components/schemas/SearchResponse'    
+  /dropdown/filters:
+    get:
+      tags:
+        - Dropdowns
+      summary: Get dropdown options
+      responses:
+        '200':
+          description: OK
 components:
   schemas:
     AuthRequest:
@@ -75,23 +90,30 @@ components:
       properties:
         username:
           type: string
+          example: "loan.officer"
         password:
           type: string
+          example: "Test@123"
     AuthResponse:
       type: object
       properties:
         status:
           type: string
+          example: "success"
         token:
           type: string
+          example: "eyJhbGciOiJIUzI1Ni..."
         expiresIn:
           type: number
+          example: 3600
         issuedAt:
           type: string
+          example: "2025-01-20T10:20:30Z"
         roles:
           type: array
           items:
             type: string
+          example: ["LoanOfficer", "ReadOnlyUser"]
     SearchRequest:
       type: object
       required:
@@ -99,20 +121,27 @@ components:
       properties:
         acknowledgmentNumber:
           type: string
+          minLength: 15
+          maxLength: 15
+          example: "ACK1234567890XY"
         loanStatus:
           type: string
           enum: [Approved, Pending, Rejected]
+          example: "Pending"
         referenceNumber:
           type: string 
+          example: "REF2025XYZ89012"
         applicationYear:
           type: integer
           default: 2026  # pre-select 2026
           enum: [2024, 2025, 2026]
+          example: 2026
     SearchResponse:
       type: object
       properties:
         status:
           type: string
+          example: "Success"
         applications:
           type: array
           items:
@@ -122,31 +151,42 @@ components:
       properties:
         applicationId: 
           type: string
+          example: "APPID2025XYZ001"
         customerName:
           type: string
+          example: "John Doe"
         loanType: 
           type: string
           enum: [Home Loan, Car Loan, Personal Loan]
+          example: "Home Loan"
         status:
           type: string
+          example: "Approved"
         amount:
           type: number 
+          example: 250000
         submittedBy:
           type: string 
+          example: "Officer A"
         submissionDate: 
           type: string  
           format: date
+          example: "2025-01-20"
         branchCode:
           type: string 
+          example: "BR001"
     ErrorResponse:
       type: object
       properties: 
         status:
           type: string
+          example: "error"
         errorCode:
           type: string
+          example: "INVALID_INPUT"
         message:
           type: string
+          example: "Application Year is required"
             
 
                      

@@ -6,9 +6,9 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 - Short one-line description
 - Positive and negative cases for: Request type, Request body, Response body, Status code
 
-<swagger-ui src="../swagger.yaml"/>
+<swagger-ui src="/swagger.yaml" filter="Search"/>
 
-## SEARCH API – SCHEMAS
+## Search Api – SCHEMAS
 
 **Model: SearchRequest**
 
@@ -72,7 +72,7 @@ ApplicationRecord:
 - **Method:** `POST`  
 - **Description:** This API will fetch the loan application details that match the provided criteria or filters applied. Positive case returns 200 OK.Negative cases: returns (400 Bad Request). 
 
-### Examples:
+### Examples
 
 **TC005.2 - Invalid Ack Num (Alphabet Only)**
 

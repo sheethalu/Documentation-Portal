@@ -24,7 +24,7 @@ plugins:
   - search
   - swagger-ui-tag:
       path_type:
-      
+
 nav:
   - Welcome: index.md
   - Project Overview: project-intro.md
@@ -38,3 +38,4 @@ nav:
 
 markdown_extensions:
   - attr_list
+
