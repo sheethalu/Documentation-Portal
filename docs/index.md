@@ -12,9 +12,9 @@ Below folder contains a Markdown documentation (README.md), Test cases, Postman 
 
 | Folder                    |	Description                                 |
 |---------------------------|---------------------------------------------|
-|[api-docs](https://github.com/sheethalu/search-loan-application/tree/main/api-docs)  | Markdown API docs	      | 
-|[postman-documentation]()   | API documentation written in postman |
-|[postman-collections](https://github.com/sheethalu/search-loan-application/tree/main/postman-collections) | API with login and search endpoints. |
+|[api-docs](https://github.com/sheethalu/search-loan-application/tree/main/api-docs)  | source directory containing endpoint specifications, error schemas, and QA validations	      | 
+|[live-portal](https://sheethalu.github.io/Documentation-Portal/)   | Interactive developer portal built using MkDocs and deployed via GitHub Pages |
+|[postman-collections](https://github.com/sheethalu/search-loan-application/tree/main/postman-collections) | API with login and search endpoints |
 |[test-cases](https://github.com/sheethalu/search-loan-application/tree/main/test-cases) | Test cases for Search API endpoint |
 
 ## Tools & Formats
