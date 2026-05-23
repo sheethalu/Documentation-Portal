@@ -79,7 +79,7 @@ ApplicationRecord:
 **Request:** 
 ```json
 {
-    "acknowledgmentNumber": "BsdthYTIJHFDSAA",
+    "acknowledgementNumber": "BsdthYTIJHFDSAA",
     "referenceNumber": "",
     "applicationId": "",
     "loanStatus": "",
@@ -101,7 +101,7 @@ ApplicationRecord:
 **Request:**
 ```json
 {
-    "acknowledgmentNumber": "ACK12345",
+    "acknowledgementNumber": "ACK12345",
     "referenceNumber": "",
     "applicationId": "",
     "loanStatus": "",
@@ -123,7 +123,7 @@ ApplicationRecord:
 **Request**
 ```json
 {
-    "acknowledgmentNumber": "",
+    "acknowledgementNumber": "",
     "referenceNumber": "456738292892019",
     "applicationId": "",
     "loanStatus": "",
@@ -145,7 +145,7 @@ ApplicationRecord:
 **Request**
 ```json
 {
-    "acknowledgmentNumber": "",
+    "acknowledgementNumber": "",
     "referenceNumber": "REF2025X",
     "applicationId": "",
     "loanStatus": "",
@@ -167,7 +167,7 @@ ApplicationRecord:
 **Request:**
 ```json
 {
-  "acknowledgmentNumber": "",
+  "acknowledgementNumber": "",
   "referenceNumber": "",
   "applicationId": "456738292892019",
   "loanStatus": "",
@@ -189,7 +189,7 @@ ApplicationRecord:
 **Request:**
 ```json
 {
-  "acknowledgmentNumber": "",
+  "acknowledgementNumber": "",
   "referenceNumber": "",
   "applicationId": "APPID2025X",
   "loanStatus": "",
@@ -211,7 +211,7 @@ ApplicationRecord:
 **Request:**
 ```json
 {
-    "acknowledgmentNumber": "",
+    "acknowledgementNumber": "",
     "referenceNumber": "",
     "applicationId": "",
     "loanStatus": "",
@@ -263,7 +263,7 @@ ApplicationRecord:
 **Request:**
 ```json
 {
-  "acknowledgmentNumber": "ACK1234567890XY",
+  "acknowledgementNumber": "ACK1234567890XY",
   "referenceNumber": "REF2025XYZ89012",
   "applicationId": "APPID2025XYZ001",
   "loanStatus": "Pending",
@@ -285,7 +285,7 @@ ApplicationRecord:
 **Request:**
 ```json
 {
-  "acknowledgmentNumber": "ACK1234567890XY",
+  "acknowledgementNumber": "ACK1234567890XY",
   "referenceNumber": "REF2025XYZ89012",
   "applicationId": "APPID2025XYZ001",
   "loanStatus": "Appoved",
@@ -317,7 +317,7 @@ ApplicationRecord:
 **Request:**
 ```json
 {
-    "acknowledgmentNumber": "",
+    "acknowledgementNumber": "",
     "referenceNumber": "",
     "applicationId": "",
     "loanStatus": "",

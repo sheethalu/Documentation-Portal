@@ -14,7 +14,7 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 
 |Field	|Type	|Required	|Description|
 |-------|-------|-----------|-----------|
-|acknowledgmentNumber	|string	|no	|1–15 alphanumeric, case-insensitive|
+|acknowledgementNumber	|string	|no	|1–15 alphanumeric, case-insensitive|
 |referenceNumber	|string	|no	|1–15 alphanumeric, case-insensitive|
 |applicationId|string	|no	|1–15 alphanumeric, case-insensitive|
 |loanStatus|string| no|One of: Approved, Pending, Rejected|
@@ -22,7 +22,7 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 
 **Sorting Request**
 
-acknowledgmentNumber: `string (1–15 alphanumeric)`  
+acknowledgementNumber: `string (1–15 alphanumeric)`  
 referenceNumber: `string (1–15 alphanumeric)`  
 applicationId: `string (1–15 alphanumeric)`  
 loanStatus: `string (enum: Approved, Pending, Rejected)`  
@@ -78,7 +78,7 @@ ApplicationRecord:
 **Request:**
 ```json
 {
-    "acknowledgmentNumber": "",
+    "acknowledgementNumber": "",
     "referenceNumber": "",
     "applicationId": "",
     "loanStatus": "",
@@ -129,7 +129,7 @@ ApplicationRecord:
 **Request:**
 ```json
 {
-    "acknowledgmentNumber": "",
+    "acknowledgementNumber": "",
     "referenceNumber": "",
     "applicationId": "",
     "loanStatus": "",

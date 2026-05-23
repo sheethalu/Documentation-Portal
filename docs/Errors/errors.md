@@ -38,7 +38,7 @@ Invalid input fields.
 {
   "status": "error",
   "errorCode": "ERR_INVALID_ACK",
-  "message": "Invalid Acknowledgment Number"
+  "message": "Invalid Acknowledgement Number"
 }
 
 {
