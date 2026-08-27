@@ -1,5 +1,5 @@
 site_name: Documentation Portal | Sheethal U
-site url: https://sheethalu.github.io/Documentation-Portal/
+site_url: https://sheethalu.github.io/Documentation-Portal/
 theme:
   name: material
   palette: 
@@ -36,6 +36,7 @@ nav:
     - Dropdowns: dropdown/dropdowns.md
     - Error Codes: Errors/errors.md
   - Resources & Downloads: resources.md
+  - OpenAPI Spec: swagger.yaml
 
 markdown_extensions:
   - attr_list
