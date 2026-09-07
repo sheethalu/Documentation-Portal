@@ -1,19 +1,39 @@
+# Name of the GitHub Actions workflow as it appears in the Actions tab
 name: Publish Docs
+# Defines the trigger condition for this automated pipeline
 on:
   push:
     branches:
       - main  # Trigger every time you push to the main branch
 
+# Grants write access to the repository so GitHub Actions can publish to GitHub Pages
 permissions:
   contents: write
 
 jobs:
+# Define the single build job named "deploy"
   deploy:
+  # Spins up a fresh, isolated Ubuntu Linux virtual machine for execution
     runs-on: ubuntu-latest
     steps:
+    # Step 1: Download/clone your repository files onto the virtual machine
       - uses: actions/checkout@v4
+
+      # Step 2: Install Python environment on the virtual machine
       - uses: actions/setup-python@v5
         with:
           python-version: 3.x
-      - run: pip install mkdocs-material mkdocs-swagger-ui-tag  # Add any other plugins here
+
+      - run: pip install mkdocs-material mkdocs-swagger-ui-tag  # Step 3: Install MkDocs theme and plugins using Python's package manager (pip)
+
+      - uses: actions/setup-node@v4 # # Step 4: Install Node.js environment required to run JavaScript-based linters
+        with: 
+          node-version: '20'
+
+      - run: npm install -g @stoplight/spectral-cli markdownlint-cli
+
+      - run: spectral lint swagger.yaml
+
+      - run: markdownlint "docs/**/*.md"
+
       - run: mkdocs gh-deploy --force
