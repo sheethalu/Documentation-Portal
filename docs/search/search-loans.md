@@ -134,8 +134,8 @@ ApplicationRecord:
 ```json
 {
   "status": "error",
-  "errorCode": "ERR_INVALID_ACK",
-  "message": "Invalid Acknowledgment Number"
+  "errorCode": "ERR_INVALID_REF",
+  "message": "Invalid Reference Number"
 }
 ```
 ![TC006.3](image-2.png)
@@ -156,8 +156,8 @@ ApplicationRecord:
 ```json
 {
   "status": "error",
-  "errorCode": "ERR_INVALID_ACK",
-  "message": "Invalid Acknowledgment Number"
+  "errorCode": "ERR_INVALID_REF"
+  "message": "Invalid Reference Number"
 }
 ```
 ![TC006.6](image-3.png)
@@ -178,8 +178,8 @@ ApplicationRecord:
 ```json
 {
   "status": "error",
-  "errorCode": "ERR_INVALID_ACK",
-  "message": "Invalid Acknowledgment Number"
+  "errorCode": "ERR_INVALID_APPID",
+  "message": "Invalid Application ID"
 }
 ```
 ![TC007.3](image-4.png)
@@ -200,8 +200,8 @@ ApplicationRecord:
 ```json
 {
   "status": "error",
-  "errorCode": "ERR_INVALID_ACK",
-  "message": "Invalid Acknowledgment Number"
+  "errorCode": "ERR_INVALID_APPID",
+  "message": "Invalid Application ID"
 }
 ```
 ![TC007.6](image-5.png)
