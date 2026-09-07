@@ -137,7 +137,9 @@ ApplicationRecord:
 }
 ```
 **Response:**
+
 ```json
+
 {
   "status": "success",
   "applications": [
@@ -173,4 +175,5 @@ ApplicationRecord:
     }
   ]
 }
+
 ```
