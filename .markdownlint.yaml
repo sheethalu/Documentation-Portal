@@ -1,7 +1,10 @@
 default: true
 
 # Turn off specific rules that you don't want to enforce
+MD012: false # Multiple consecutive blank lines
 MD013: false # Line length
+MD022: false # Headings should be surrounded by blank lines
 MD031: false # Blank lines around fenced code blocks
+MD032: false # Lists should be surrounded by blank lines
 MD036: false # Emphasis used instead of heading
 MD047: false # Files should end with a single newline character
