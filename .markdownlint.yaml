@@ -1,4 +1,7 @@
 default: true
-MD013: false
-MD033: false
-MD047: false
+
+# Turn off specific rules that you don't want to enforce
+MD013: false # Line length
+MD031: false # Blank lines around fenced code blocks
+MD036: false # Emphasis used instead of heading
+MD047: false # Files should end with a single newline character
