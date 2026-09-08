@@ -35,8 +35,7 @@ jobs:
       - run: spectral lint swagger.yaml
 
       #- run: markdownlint "docs/**/*.md"
-      
-      - name: Run markdownlint
+
       - run: npx markdownlint-cli "docs/auth/login.md"
 
       - run: mkdocs gh-deploy --force
