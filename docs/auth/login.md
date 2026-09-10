@@ -28,13 +28,13 @@ password: `string (required)`
 
 **Model: AuthResponse**
 
-|Field      |Type             |Description                           |
-|-----------|-----------------|--------------------------------------|
-| status    | string          |	Response status, e.g., "success".    |
-| token     | string (JWT)    | Access token used for authentication.|
-| expiresIn |	number          | Expiration time in seconds.          |
-| issuedAt  | string (ISO8601)|	Timestamp when token was issued.     |
-| roles	    | array[string]	  | The user’s roles / permissions.      |
+| Field     | Type             | Description                            |
+| --------- | ---------------- | -------------------------------------- |
+| status    | string           | Response status, e.g., "success".      |
+| token     | string (JWT)     | Access token used for authentication.  |
+| expiresIn | number           | Expiration time in seconds.            |
+| issuedAt  | string (ISO8601) | Timestamp when token was issued.       |
+| roles     | array[string]    | The user's roles / permissions.        |
 
 **AuthResponse**
 ```yaml
