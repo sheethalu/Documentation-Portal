@@ -6,5 +6,6 @@ MD013: false # Line length
 MD022: false # Headings should be surrounded by blank lines
 MD031: false # Blank lines around fenced code blocks
 MD032: false # Lists should be surrounded by blank lines
+MD033: false # Allow inline HTML for rendering custom UI elements like <swagger-ui>
 MD036: false # Emphasis used instead of heading
 MD047: false # Files should end with a single newline character
