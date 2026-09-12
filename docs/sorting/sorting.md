@@ -1,4 +1,4 @@
-## Endpoint reference (detailed)
+# Endpoint reference (detailed)
 
 All request and response bodies are JSON unless otherwise stated. For each endpoint below you'll find:
 
@@ -12,13 +12,13 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 
 **Model: Sorting Request**
 
-|Field	|Type	|Required	|Description|
-|-------|-------|-----------|-----------|
-|acknowledgementNumber	|string	|no	|1–15 alphanumeric, case-insensitive|
-|referenceNumber	|string	|no	|1–15 alphanumeric, case-insensitive|
-|applicationId|string	|no	|1–15 alphanumeric, case-insensitive|
-|loanStatus|string| no|One of: Approved, Pending, Rejected|
-|applicationYear | number| yes | Allowed: 2024, 2025, 2026. Default: 2026|
+| Field                 | Type   | Required | Description                              |
+|-----------------------|--------|----------|------------------------------------------|
+| acknowledgementNumber | string | no       | 1–15 alphanumeric, case-insensitive      |
+| referenceNumber       | string | no       | 1–15 alphanumeric, case-insensitive      |
+| applicationId         | string | no       | 1–15 alphanumeric, case-insensitive      |
+| loanStatus            | string | no       | One of: Approved, Pending, Rejected      |
+| applicationYear       | number | yes      | Allowed: 2024, 2025, 2026. Default: 2026 |
 
 **Sorting Request**
 
@@ -31,24 +31,24 @@ applicationYear: `number (required, enum: 2024 | 2025 | 2026; default=2026)`
 
 **Model: Sorting Response**
 
-|Field	|Type	|Description|
-|-------|-------|-----------|
-|status	|string	|Response status.|
-|applications	|array<ApplicationRecord>	|List of loan applications matching the criteria.|
+| Field        | Type                     | Description                                      |
+|--------------|--------------------------|--------------------------------------------------|
+| status       | string                   | Response status.                                 |
+| applications | array<ApplicationRecord> | List of loan applications matching the criteria. |
 
 
 **Model: ApplicationRecord**
 
-|Field	|Type	|Description|
-|-------|-------|-----------|
-|applicationId	|string	|Unique ID of the loan application.|
-|customerName	|string	|Customer’s full name.|
-|loanType	|string	|Type of loan (e.g., Home Loan).|
-|status	|string	|Application status.|
-|amount	|number	|Loan amount approved/requested.|
-|submittedBy	|string	|Loan officer who created the application.|
-|submissionDate	|string (YYYY-MM-DD)	|Date of submission.|
-|branchCode	|string	|Branch identifier.|
+| Field          | Type                | Description                               |
+|----------------|---------------------|-------------------------------------------|
+| applicationId  | string              | Unique ID of the loan application.        |
+| customerName   | string              | Customer’s full name.                     |
+| loanType       | string              | Type of loan (e.g., Home Loan).           |
+| status         | string              | Application status.                       |
+| amount         | number              | Loan amount approved/requested.           |
+| submittedBy    | string              | Loan officer who created the application. |
+| submissionDate | string (YYYY-MM-DD) | Date of submission.                       |
+| branchCode     | string              | Branch identifier.                        |
 
 
 **SearchResponse**
