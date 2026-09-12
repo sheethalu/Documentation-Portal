@@ -36,6 +36,6 @@ jobs:
 
       #- run: markdownlint "docs/**/*.md"
 
-      - run: npx markdownlint-cli "docs/sorting/sorting.md"
+      - run: npx markdownlint-cli "docs/index.md"
 
       - run: mkdocs gh-deploy --force
