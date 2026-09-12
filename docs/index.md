@@ -1,7 +1,7 @@
-## API Documentation Portfolio
-by Sheethal U — Technical Writer | Manual QA 
+# API Documentation Portfolio
+by Sheethal U — Technical Writer | Manual QA
 
-### Welcome to my API Documentation Portfolio.
+### Welcome to my API Documentation Portfolio
 This repository showcases a collection of well-structured, tested and developer-friendly API documentations written in Markdown.
 
 ## About Me
@@ -10,12 +10,12 @@ I’m Sheethal U, a Manual QA Engineer and technical writer specializing in Manu
 ## Portfolio Projects
 Below folder contains a Markdown documentation (README.md), Test cases, Postman collection, and Postman documentation for a specific API or developer use case.
 
-| Folder                    |	Description                                 |
-|---------------------------|---------------------------------------------|
-|[api-docs](https://github.com/sheethalu/search-loan-application/tree/main/api-docs)  | Source directory containing endpoint specifications, error schemas, and QA validations	      | 
-|[live-portal](https://sheethalu.github.io/Documentation-Portal/)   | Interactive developer portal built using MkDocs and deployed via GitHub Pages |
-|[postman-collections](https://github.com/sheethalu/search-loan-application/tree/main/postman-collections) | API with login and search endpoints |
-|[test-cases](https://github.com/sheethalu/search-loan-application/tree/main/test-cases) | Test cases for Search API endpoint |
+| Folder                                                                                                    | Description                                                           |
+|-----------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------|
+| [api-docs](https://github.com/sheethalu/search-loan-application/tree/main/api-docs)                       | Source directory containing endpoint specifications, error schemas, and QA validations | 
+| [live-portal](https://sheethalu.github.io/Documentation-Portal/)                                          | Interactive developer portal built using MkDocs and deployed via GitHub Pages               |
+| [postman-collections](https://github.com/sheethalu/search-loan-application/tree/main/postman-collections) | API with login and search endpoints                                                             |
+| [test-cases](https://github.com/sheethalu/search-loan-application/tree/main/test-cases)                   | Test cases for Search API endpoint                                                              |
 
 ## Tools & Formats
 All documentation written in:
