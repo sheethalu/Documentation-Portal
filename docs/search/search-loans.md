@@ -15,8 +15,8 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 | Field                | Type   | Required  | Description                              |
 |----------------------|--------|-----------|------------------------------------------|
 | acknowledgmentNumber | string | no        | 1–15 alphanumeric, case-insensitive      |
-| referenceNumber      | string	| no        | 1–15 alphanumeric, case-insensitive      |
-| applicationId        | string	| no        | 1–15 alphanumeric, case-insensitive      |
+| referenceNumber      | string | no        | 1–15 alphanumeric, case-insensitive      |
+| applicationId        | string | no        | 1–15 alphanumeric, case-insensitive      |
 | loanStatus           | string | no        | One of: Approved, Pending, Rejected      |
 | applicationYear      | number | yes       | Allowed: 2024, 2025, 2026. Default: 2026 |
 
