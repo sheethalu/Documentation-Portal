@@ -11,6 +11,7 @@ HTTP Status Code Summary
 200	OK	Everything worked as expected.
 
 ```json
+
 {
   "status": "success",
   "applications": [
