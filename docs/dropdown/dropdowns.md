@@ -1,4 +1,4 @@
-## Endpoint reference (detailed)
+# Endpoint reference (detailed)
 
 All request and response bodies are JSON unless otherwise stated. For each endpoint below you'll find:
 
@@ -11,10 +11,10 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 ## DROPDOWN API – SCHEMAS
 
 **Model: Dropdown Response**
-|Field	|Type	|Description|
-|-------|-------|-----------|
-|loanStatus	|array<LoanStatus>	|List of Loan application status|
-|applicationYear	|array<ApplicationYear>	|List of application year|
+| Field	         | Type	                 | Description                    |
+|----------------|-----------------------|--------------------------------|
+| loanStatus     | array<LoanStatus>     | List of Loan application status|
+| applicationYear| array<ApplicationYear>| List of application year       |
 
 
 **Dropdown Response**
@@ -27,7 +27,7 @@ applications: `array<ApplicationYear>`
 - **Method:** `GET`  
 - **Description:** This API will returns the loan application status and application year dropdown options that is available in the search filter. Positive case returns 200 OK.
 
-### Example:
+### Example
 
 **Response:**
 ```json
