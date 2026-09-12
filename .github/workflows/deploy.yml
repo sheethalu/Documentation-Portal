@@ -36,6 +36,6 @@ jobs:
 
       #- run: markdownlint "docs/**/*.md"
 
-      - run: npx markdownlint-cli "docs/errors/errors.md"
+      - run: npx markdownlint-cli "docs/search/search-loans.md"
 
       - run: mkdocs gh-deploy --force

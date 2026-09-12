@@ -73,6 +73,7 @@ The parameters were valid but the request failed.
 The requested resource doesn’t exist.
 
 ```json
+
 {
   "error": "Missing mandatory field",
   "errorCode": "ERR_MIS_APPYR",
