@@ -12,7 +12,7 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 
 **Model: SearchRequest**
 
-| Field                | Type   | Required	| Description                              |
+| Field                | Type   | Required  | Description                              |
 |----------------------|--------|-----------|------------------------------------------|
 | acknowledgmentNumber | string | no        | 1–15 alphanumeric, case-insensitive      |
 | referenceNumber      | string	| no        | 1–15 alphanumeric, case-insensitive      |
