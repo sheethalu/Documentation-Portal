@@ -11,10 +11,10 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 ## DROPDOWN API – SCHEMAS
 
 **Model: Dropdown Response**
-| Field	         | Type	                 | Description                    |
-|----------------|-----------------------|--------------------------------|
-| loanStatus     | array<LoanStatus>     | List of Loan application status|
-| applicationYear| array<ApplicationYear>| List of application year       |
+| Field           | Type                   | Description                     |
+| --------------- | ---------------------- | ------------------------------- |
+| loanStatus      | array<LoanStatus>      | List of Loan application status |
+| applicationYear | array<ApplicationYear> | List of application year        |
 
 
 **Dropdown Response**
