@@ -1,4 +1,4 @@
-## Endpoint reference (detailed)
+# Endpoint reference (detailed)
 
 All request and response bodies are JSON unless otherwise stated. For each endpoint below you'll find:
 
@@ -12,13 +12,13 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 
 **Model: SearchRequest**
 
-|Field	|Type	|Required	|Description|
-|-------|-------|-----------|-----------|
-|acknowledgmentNumber	|string	|no	|1–15 alphanumeric, case-insensitive|
-|referenceNumber	|string	|no	|1–15 alphanumeric, case-insensitive|
-|applicationId|string	|no	|1–15 alphanumeric, case-insensitive|
-|loanStatus|string| no|One of: Approved, Pending, Rejected|
-|applicationYear | number| yes | Allowed: 2024, 2025, 2026. Default: 2026|
+| Field                | Type   | Required	| Description                              |
+|----------------------|--------|-----------|------------------------------------------|
+| acknowledgmentNumber | string | no        | 1–15 alphanumeric, case-insensitive      |
+| referenceNumber      | string	| no        | 1–15 alphanumeric, case-insensitive      |
+| applicationId        | string	| no        | 1–15 alphanumeric, case-insensitive      |
+| loanStatus           | string | no        | One of: Approved, Pending, Rejected      |
+| applicationYear      | number | yes       | Allowed: 2024, 2025, 2026. Default: 2026 |
 
 **SearchRequest**
 
@@ -31,24 +31,24 @@ applicationYear: `number (required, enum: 2024 | 2025 | 2026; default=2026)`
 
 **Model: SearchResponse**
 
-|Field	      |Type	                    |Description|
-|-------------|-------------------------|-----------|
-|status	      |string	                  |Response status.|
-|applications	|array<ApplicationRecord>	|List of loan applications matching the criteria.|
+| Field        | Type                     | Description                                      |
+|--------------|--------------------------|--------------------------------------------------|
+| status       | string                   | Response status.                                 |
+| applications | array<ApplicationRecord> | List of loan applications matching the criteria. |
 
 
 **Model: ApplicationRecord**
 
-|Field	|Type	|Description|
-|-------|-------|-----------|
-|applicationId	|string	|Unique ID of the loan application.|
-|customerName	|string	|Customer’s full name.|
-|loanType	|string	|Type of loan (e.g., Home Loan).|
-|status	|string	|Application status.|
-|amount	|number	|Loan amount approved/requested.|
-|submittedBy	|string	|Loan officer who created the application.|
-|submissionDate	|string (YYYY-MM-DD)	|Date of submission.|
-|branchCode	|string	|Branch identifier.|
+| Field          | Type                | Description                               |
+|----------------|---------------------|-------------------------------------------|
+| applicationId  | string              | Unique ID of the loan application.        |
+| customerName   | string              | Customer’s full name.                     |
+| loanType       | string              | Type of loan (e.g., Home Loan).           |
+| status         | string              | Application status.                       |
+| amount         | number              | Loan amount approved/requested.           |
+| submittedBy    | string              | Loan officer who created the application. |
+| submissionDate | string (YYYY-MM-DD) | Date of submission.                       |
+| branchCode     | string              | Branch identifier.                        |
 
 
 **SearchResponse**
@@ -70,13 +70,14 @@ ApplicationRecord:
 ## Search loan applications
 - **URL:** `/search-loans`  
 - **Method:** `POST`  
-- **Description:** This API will fetch the loan application details that match the provided criteria or filters applied. Positive case returns 200 OK.Negative cases: returns (400 Bad Request). 
+- **Description:** This API will fetch the loan application details that match the provided criteria or filters applied. Positive case returns 200 OK.Negative cases: returns (400 Bad Request).
 
 ### Examples
 
 **TC005.2 - Invalid Ack Num (Alphabet Only)**
 
-**Request:** 
+**Request:**
+
 ```json
 {
     "acknowledgementNumber": "BsdthYTIJHFDSAA",
@@ -87,6 +88,7 @@ ApplicationRecord:
 }
 ```
 **Response:**
+
 ```json
 {
   "status": "error",
@@ -99,6 +101,7 @@ ApplicationRecord:
 **TC005.6 - Invalid Ack Num (Too Short)**
 
 **Request:**
+
 ```json
 {
     "acknowledgementNumber": "ACK12345",
@@ -109,6 +112,7 @@ ApplicationRecord:
 }
 ```
 **Response:**
+
 ```json
 {
   "status": "error",
@@ -121,6 +125,7 @@ ApplicationRecord:
 **TC006.3 - Invalid Ref Num (Numeric Only)**
 
 **Request**
+
 ```json
 {
     "acknowledgementNumber": "",
@@ -131,6 +136,7 @@ ApplicationRecord:
 }
 ```
 **Response:**
+
 ```json
 {
   "status": "error",
@@ -143,6 +149,7 @@ ApplicationRecord:
 **TC006.6 - Invalid Ref Num (Too Short)**
 
 **Request**
+
 ```json
 {
     "acknowledgementNumber": "",
@@ -153,6 +160,7 @@ ApplicationRecord:
 }
 ```
 **Response:**
+
 ```json
 {
   "status": "error",
@@ -165,6 +173,7 @@ ApplicationRecord:
 **TC007.3 - Invalid Application ID (Numeric only)**
 
 **Request:**
+
 ```json
 {
   "acknowledgementNumber": "",
@@ -175,6 +184,7 @@ ApplicationRecord:
 }
 ```
 **Response:**
+
 ```json
 {
   "status": "error",
@@ -187,6 +197,7 @@ ApplicationRecord:
 **TC007.6 - Invalid Application ID (Too short)**
 
 **Request:**
+
 ```json
 {
   "acknowledgementNumber": "",
@@ -197,6 +208,7 @@ ApplicationRecord:
 }
 ```
 **Response:**
+
 ```json
 {
   "status": "error",
@@ -209,6 +221,7 @@ ApplicationRecord:
 **TC016 - Mandatory Application Year**
 
 **Request:**
+
 ```json
 {
     "acknowledgementNumber": "",
@@ -219,6 +232,7 @@ ApplicationRecord:
 }
 ```
 **Response:**
+
 ```json
 {
   "status": "success",
@@ -261,6 +275,7 @@ ApplicationRecord:
 **TC017 – No Record Found (Valid IDs + Invalid Loan Status)**
 
 **Request:**
+
 ```json
 {
   "acknowledgementNumber": "ACK1234567890XY",
@@ -270,8 +285,8 @@ ApplicationRecord:
   "applicationYear": 2025
 }
 ```
-
 **Response(404 Not Found):**
+
 ```json
 {
   "status": "not_found",
@@ -283,6 +298,7 @@ ApplicationRecord:
 
 **TC018 - Success (Valid IDs + Status)**
 **Request:**
+
 ```json
 {
   "acknowledgementNumber": "ACK1234567890XY",
@@ -293,6 +309,7 @@ ApplicationRecord:
 }
 ```
 **Response(200 OK):**
+
 ```json
 {
   "status": "success",
@@ -315,6 +332,7 @@ ApplicationRecord:
 **Missing Mandatory Field - applicationYear**
 
 **Request:**
+
 ```json
 {
     "acknowledgementNumber": "",
@@ -325,6 +343,7 @@ ApplicationRecord:
 }
 ```
 **Response:**
+
 ```json
 {
   "error": "Missing mandatory field",
