@@ -24,7 +24,7 @@ theme:
 plugins:
   - search
   - swagger-ui-tag:
-      path_type:
+      path_type: relative
 
 nav:
   - Welcome: index.md
@@ -36,7 +36,7 @@ nav:
     - Dropdowns: dropdown/dropdowns.md
     - Error Codes: errors/errors.md
   - Resources & Downloads: resources.md
-  - OpenAPI Spec: docs/swagger.yaml
+  - OpenAPI Spec: swagger.yaml
 
 markdown_extensions:
   - attr_list
