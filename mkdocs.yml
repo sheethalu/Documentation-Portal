@@ -31,7 +31,7 @@ nav:
   - Project Overview: project-intro.md
   - API Reference:
     - Authentication: auth/login.md
-    - Search API: search/search-loans.md
+    - Search: search/search-loans.md
     - Sorting: sorting/sorting.md
     - Dropdowns: dropdown/dropdowns.md
     - Error Codes: Errors/errors.md
