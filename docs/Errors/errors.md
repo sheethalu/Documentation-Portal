@@ -8,7 +8,7 @@ HTTP Status Code Summary
 
 ## 200 OK (Success)
 
-200	OK	Everything worked as expected.
+200	OK Everything worked as expected.
 
 ```json
 
@@ -32,7 +32,7 @@ HTTP Status Code Summary
 
 ## 400 Bad Request  
 
-400	Bad Request	The request was unacceptable, often due to missing a required parameter.
+400	Bad Request The request was unacceptable, often due to missing a required parameter.
 Invalid input fields.
 
 ```json
