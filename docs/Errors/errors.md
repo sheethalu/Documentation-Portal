@@ -30,7 +30,7 @@ HTTP Status Code Summary
 
 ```
 
-## 400 Bad Request  
+## 400 Bad Request
 
 400	Bad Request The request was unacceptable, often due to missing a required parameter.
 Invalid input fields.
@@ -56,7 +56,7 @@ Invalid input fields.
 
 ```
 
-## 402	Request Failed  
+## 402 Request Failed
 
 The parameters were valid but the request failed.
 
@@ -68,7 +68,7 @@ The parameters were valid but the request failed.
 }
 ```
 
-## 404	Not Found  
+## 404 Not Found
 
 The requested resource doesn’t exist.
 
