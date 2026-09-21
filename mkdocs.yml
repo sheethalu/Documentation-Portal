@@ -34,9 +34,9 @@ nav:
     - Search: search/search-loans.md
     - Sorting: sorting/sorting.md
     - Dropdowns: dropdown/dropdowns.md
-    - Error Codes: Errors/errors.md
+    - Error Codes: errors/errors.md
   - Resources & Downloads: resources.md
-  - OpenAPI Spec: swagger.yaml
+  - OpenAPI Spec: docs/swagger.yaml
 
 markdown_extensions:
   - attr_list
