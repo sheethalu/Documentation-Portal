@@ -6,6 +6,32 @@ This API lets a loan officer search existing loan applications using simple sear
 
 **Base URL:** `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/`
 
+```text
+
+Documentation-Portal/
+├── .github/workflows/
+│   └── deploy.yml          # GitHub Actions CI/CD pipeline
+├── docs/                   # Base documentation source
+│   ├── auth/               # Endpoint docs: Authentication
+│   │   └── login.md
+│   ├── dropdown/           # Endpoint docs: Reference Data
+│   │   └── dropdowns.md
+│   ├── errors/             # Global error response codes
+│   │   └── errors.md
+│   ├── search/             # Endpoint docs: Search & Loans
+│   │   └── search-loans.md
+│   ├── sorting/            # Endpoint docs: Sorting parameters
+│   │   └── sorting.md
+│   ├── index.md            # Technical Writer Portfolio & Resume
+│   ├── project-intro.md    # System architecture & domain overview
+│   ├── resources.md        # Downloadable Postman collections & test cases
+│   └── swagger.yaml        # OpenAPI 3.0 specification file
+├── .markdownlint.yaml      # Markdown linting rule configuration
+├── .spectral.yaml          # Spectral OpenAPI linting ruleset
+└── mkdocs.yml              # Site navigation & plugin configuration
+
+```
+
 ## What you need
 
 - A tool to make HTTP requests (Postman).
