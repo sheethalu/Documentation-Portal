@@ -6,6 +6,10 @@ This API lets a loan officer search existing loan applications using simple sear
 
 **Base URL:** `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/`
 
+## Repository & Information Architecture
+
+This documentation portal uses a **Docs-as-Code** approach. The source Markdown files, OpenAPI specifications, and automated CI/CD configurations are organized as follows:
+
 ```text
 
 Documentation-Portal/
