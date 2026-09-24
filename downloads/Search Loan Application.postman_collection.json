@@ -1,0 +1,962 @@
+{
+	"info": {
+		"_postman_id": "c6eaf4e3-bd75-4421-978d-2a54be0c6e14",
+		"name": "Search Loan Application",
+		"description": "# Overview & Getting Started\n\n## Purpose\n\nThis API lets a loan officer search existing loan applications using simple search filters (acknowledgment number, reference number, application ID, loan status, year).\n\n**Base URL:** `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/`\n\n## Authentication\n\n- Auth uses JSON Web Tokens (JWT) sent in the `Authorization header: Authorization: Bearer`\n    \n\n## Filters (Business Rules)\n\n- **Acknowledgment Number**: 1–15 alphanumeric (case-insensitive). Anything else → _Invalid Acknowledgment Number_.\n    \n- **Reference Number**: 1–15 alphanumeric. Anything else → _Invalid Reference Number_.\n    \n- **Application Id**: 1–15 alphanumeric. Anything else → _Invalid Application ID_.\n    \n- **Loan Status**: one of `Approved`, `Pending`, `Rejected`.\n    \n- **Application Year**: **(Required)** Allowed: `2023`, `2024`, `2025`. Default UI value: `2025`.\n    \n\n## Endpoints\n\n- [/auth/login](#login-(auth))\n    \n- [/search-loans](#search-loans-applications)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19089975",
+		"_collection_link": "https://crimson-rocket-50415.postman.co/workspace/Postman-Workspace~9fd5fbe2-8d56-45ec-8553-1305ba2a379e/collection/19089975-c6eaf4e3-bd75-4421-978d-2a54be0c6e14?action=share&source=collection_link&creator=19089975"
+	},
+	"item": [
+		{
+			"name": "Login (auth)",
+			"item": [
+				{
+					"name": "Authentication - Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();\r",
+									"pm.collectionVariables.set(\"authToken\", res.token);"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"username\": \"loan.officer\",\r\n  \"password\": \"Test@123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/auth/login",
+							"protocol": "https",
+							"host": [
+								"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						},
+						"description": "## Request:"
+					},
+					"response": [
+						{
+							"name": "Login - Success",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"loan.officer\",\r\n  \"password\": \"Test@123\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/auth/login",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"success\",\r\n  \"token\": \"eyMockToken123456789.placeholder\",\r\n  \"expiresIn\": 3600,\r\n  \"issuedAt\": \"2025-01-20T10:20:30Z\",\r\n  \"roles\": [\"LoanOfficer\", \"ReadOnlyUser\"]\r\n}"
+						},
+						{
+							"name": "Login - Invalid Credentials",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"username\": \"wrong.user\",\r\n  \"password\": \"wrongpass\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/auth/login",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"auth",
+										"login"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"error\",\r\n  \"errorCode\": \"ERR_INVALID_CREDENTIALS\",\r\n  \"message\": \"Invalid username or password.\"\r\n}"
+						}
+					]
+				}
+			],
+			"description": "- **URL:** /auth/login\n    \n- **Method:** POST\n    \n- **Description:** Authenticate and receive an access token. Positive case returns 200 with token. Negative cases: invalid credentials (401)"
+		},
+		{
+			"name": "Search loan applications",
+			"item": [
+				{
+					"name": "Search loans",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// TC005.2\r",
+									"// 1. Parse the JSON response \r",
+									"const res = pm.response.json();\r",
+									"\r",
+									"// 2. Validate status code\r",
+									"pm.test(\"TC005.2: Status code is 400\", function () {\r",
+									"    pm.response.to.have.status(400);\r",
+									"});\r",
+									"\r",
+									"// 3. Validate required error fields exist\r",
+									"pm.test(\"TC005.2: Error fields exist\", function () {\r",
+									"    pm.expect(res).to.have.property(\"status\");\r",
+									"    pm.expect(res).to.have.property(\"errorCode\");\r",
+									"    pm.expect(res).to.have.property(\"message\");\r",
+									"});\r",
+									"\r",
+									"// 4. Validate error message values\r",
+									"pm.test(\"TC005.2: Correct error messages\", function () {\r",
+									"    pm.expect(res.status).to.eql(\"error\");\r",
+									"    pm.expect(res.errorCode).to.eql(\"ERR_INVALID_ACK\");\r",
+									"    pm.expect(res.message).to.eql(\"Invalid Acknowledgment Number\");\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{authToken}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"acknowledgmentNumber\": \"BsdthYTIJHFDSAA\",\r\n    \"referenceNumber\": \"\",\r\n    \"applicationId\": \"\",\r\n    \"loanStatus\": \"\",\r\n    \"applicationYear\": 2025\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans",
+							"protocol": "https",
+							"host": [
+								"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"search-loans"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "TC005.2 - Invalid Ack Num (Alphabet Only)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"acknowledgmentNumber\": \"BsdthYTIJHFDSAA\",\r\n    \"referenceNumber\": \"\",\r\n    \"applicationId\": \"\",\r\n    \"loanStatus\": \"\",\r\n    \"applicationYear\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"error\",\r\n  \"errorCode\": \"ERR_INVALID_ACK\",\r\n  \"message\": \"Invalid Acknowledgment Number\"\r\n}\r\n"
+						},
+						{
+							"name": "TC005.6 - Invalid Ack Num (Too Short)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"acknowledgmentNumber\": \"ACK12345\",\r\n    \"referenceNumber\": \"\",\r\n    \"applicationId\": \"\",\r\n    \"loanStatus\": \"\",\r\n    \"applicationYear\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"error\",\r\n  \"errorCode\": \"ERR_INVALID_ACK\",\r\n  \"message\": \"Invalid Acknowledgment Number\"\r\n}\r\n"
+						},
+						{
+							"name": "TC006.3 - Invalid Ref Num (Numeric Only)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"acknowledgmentNumber\": \"\",\r\n    \"referenceNumber\": \"456738292892019\",\r\n    \"applicationId\": \"\",\r\n    \"loanStatus\": \"\",\r\n    \"applicationYear\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"error\",\r\n  \"errorCode\": \"ERR_INVALID_REF\",\r\n  \"message\": \"Invalid Reference Number\"\r\n}\r\n"
+						},
+						{
+							"name": "TC006.6 - Invalid Ref Num (Too Short)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"acknowledgmentNumber\": \"\",\r\n    \"referenceNumber\": \"REF2025X\",\r\n    \"applicationId\": \"\",\r\n    \"loanStatus\": \"\",\r\n    \"applicationYear\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"error\",\r\n  \"errorCode\": \"ERR_INVALID_REF\",\r\n  \"message\": \"Invalid Reference Number\"\r\n}"
+						},
+						{
+							"name": "TC007.3 - Invalid Application ID (Numeric only)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"acknowledgmentNumber\": \"\",\r\n  \"referenceNumber\": \"\",\r\n  \"applicationId\": \"456738292892019\",\r\n  \"loanStatus\": \"\",\r\n  \"applicationYear\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"error\",\r\n  \"errorCode\": \"ERR_INVALID_APPID\",\r\n  \"message\": \"Invalid Application ID\"\r\n}\r\n"
+						},
+						{
+							"name": "TC007.6 - Invalid Application ID (Too short)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"acknowledgmentNumber\": \"\",\r\n  \"referenceNumber\": \"\",\r\n  \"applicationId\": \"APPID2025X\",\r\n  \"loanStatus\": \"\",\r\n  \"applicationYear\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"error\",\r\n  \"errorCode\": \"ERR_INVALID_APPID\",\r\n  \"message\": \"Invalid Application ID\"\r\n}\r\n"
+						},
+						{
+							"name": "TC016 - Mandatory Application Year",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"acknowledgmentNumber\": \"\",\r\n    \"referenceNumber\": \"\",\r\n    \"applicationId\": \"\",\r\n    \"loanStatus\": \"\",\r\n    \"applicationYear\": \"2025\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"success\",\r\n  \"applications\": [\r\n    {\r\n      \"applicationId\": \"APPID2025XYZ890\",\r\n      \"customerName\": \"John Doe\",\r\n      \"loanType\": \"Home Loan\",\r\n      \"status\": \"Approved\",\r\n      \"amount\": 250000,\r\n      \"submittedBy\": \"Officer A\",\r\n      \"submissionDate\": \"2025-01-20\",\r\n      \"branchCode\": \"BR001\"\r\n    },\r\n    {\r\n      \"applicationId\": \"APPID2025XYZ891\",\r\n      \"customerName\": \"Jane Smith\",\r\n      \"loanType\": \"Car Loan\",\r\n      \"status\": \"Rejected\",\r\n      \"amount\": 90000,\r\n      \"submittedBy\": \"Officer B\",\r\n      \"submissionDate\": \"2025-01-10\",\r\n      \"branchCode\": \"BR002\"\r\n    },\r\n    {\r\n      \"applicationId\": \"APPID2025XYZ892\",\r\n      \"customerName\": \"Jane Austin\",\r\n      \"loanType\": \"Personal Loan\",\r\n      \"status\": \"Pending\",\r\n      \"amount\": 90000,\r\n      \"submittedBy\": \"Officer B\",\r\n      \"submissionDate\": \"2025-01-11\",\r\n      \"branchCode\": \"BR002\"\r\n    }\r\n  ]\r\n}\r\n"
+						},
+						{
+							"name": "TC017 - No Record Found (Valid IDs + Invalid Loan Status)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"acknowledgmentNumber\": \"ACK1234567890XY\",\r\n  \"referenceNumber\": \"REF2025XYZ89012\",\r\n  \"applicationId\": \"APPID2025XYZ001\",\r\n  \"loanStatus\": \"Pending\",\r\n  \"applicationYear\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"not_found\",\r\n  \"message\": \"No record found\",\r\n  \"applications\": []\r\n}\r\n"
+						},
+						{
+							"name": "TC018 - Success (Valid IDs + Status)",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"acknowledgmentNumber\": \"ACK1234567890XY\",\r\n  \"referenceNumber\": \"REF2025XYZ89012\",\r\n  \"applicationId\": \"APPID2025XYZ001\",\r\n  \"loanStatus\": \"Appoved\",\r\n  \"applicationYear\": 2025\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"success\",\r\n  \"applications\": [\r\n    {\r\n      \"applicationId\": \"APPID2025XYZ001\",\r\n      \"customerName\": \"John Doe\",\r\n      \"loanType\": \"Home Loan\",\r\n      \"status\": \"Approved\",\r\n      \"amount\": 250000,\r\n      \"submittedBy\": \"Officer A\",\r\n      \"submissionDate\": \"2025-01-20\",\r\n      \"branchCode\": \"BR001\"\r\n    }\r\n  ]\r\n}"
+						},
+						{
+							"name": "Missing Mandatory Field - applicationYear",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"acknowledgmentNumber\": \"\",\r\n    \"referenceNumber\": \"\",\r\n    \"applicationId\": \"\",\r\n    \"loanStatus\": \"\",\r\n    \"applicationYear\": \"\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"error\": \"Missing mandatory field\",\r\n  \"errorCode\": \"ERR_MIS_APPYR\",\r\n  \"message\": \"Application Year is required\"\r\n}"
+						}
+					]
+				}
+			],
+			"description": "- **URL:** /search-loans\n    \n- **Method:** POST\n    \n- **Description:** Authenticate and receive an access token. Positive case returns 200 with token. Negative cases: invalid credentials (401)"
+		},
+		{
+			"name": "Dropdown",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/dropdown/filters",
+							"protocol": "https",
+							"host": [
+								"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"dropdown",
+								"filters"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/dropdowns/filters",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"dropdowns",
+										"filters"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\r\n  \"loanStatus\": [\"Approved\", \"Pending\", \"Rejected\"],\r\n  \"applicationYear\": [\"2023\", \"2024\", \"2025\"]\r\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Sorting",
+			"item": [
+				{
+					"name": "Sorting",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"acknowledgmentNumber\": \"\",\r\n    \"referenceNumber\": \"\",\r\n    \"applicationId\": \"\",\r\n    \"loanStatus\": \"\",\r\n    \"applicationYear\": \"2025\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans?sortBy=submissionDate&sortOrder=desc",
+							"protocol": "https",
+							"host": [
+								"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"search-loans"
+							],
+							"query": [
+								{
+									"key": "sortBy",
+									"value": "submissionDate"
+								},
+								{
+									"key": "sortOrder",
+									"value": "desc"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Sorting - desc",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"acknowledgmentNumber\": \"\",\r\n    \"referenceNumber\": \"\",\r\n    \"applicationId\": \"\",\r\n    \"loanStatus\": \"\",\r\n    \"applicationYear\": \"2025\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans?sortBy=submissionDate&sortOrder=desc",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									],
+									"query": [
+										{
+											"key": "sortBy",
+											"value": "submissionDate"
+										},
+										{
+											"key": "sortOrder",
+											"value": "desc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date",
+									"domain": "",
+									"path": ""
+								}
+							],
+							"body": "{\r\n  \"status\": \"success\",\r\n  \"applications\": [\r\n    {\r\n      \"applicationId\": \"APPID2025XYZ892\",\r\n      \"customerName\": \"Jane Austin\",\r\n      \"loanType\": \"Personal Loan\",\r\n      \"status\": \"Pending\",\r\n      \"amount\": 90000,\r\n      \"submittedBy\": \"Officer B\",\r\n      \"submissionDate\": \"2025-09-11\",\r\n      \"branchCode\": \"BR002\"\r\n    },\r\n      {\r\n      \"applicationId\": \"APPID2025XYZ891\",\r\n      \"customerName\": \"Jane Smith\",\r\n      \"loanType\": \"Car Loan\",\r\n      \"status\": \"Rejected\",\r\n      \"amount\": 90000,\r\n      \"submittedBy\": \"Officer B\",\r\n      \"submissionDate\": \"2025-06-10\",\r\n      \"branchCode\": \"BR002\"\r\n    },\r\n    {\r\n      \"applicationId\": \"APPID2025XYZ890\",\r\n      \"customerName\": \"John Doe\",\r\n      \"loanType\": \"Home Loan\",\r\n      \"status\": \"Approved\",\r\n      \"amount\": 250000,\r\n      \"submittedBy\": \"Officer A\",\r\n      \"submissionDate\": \"2025-01-20\",\r\n      \"branchCode\": \"BR001\"\r\n    }\r\n  ]\r\n}\r\n"
+						},
+						{
+							"name": "Sorting - asc",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"acknowledgmentNumber\": \"\",\r\n    \"referenceNumber\": \"\",\r\n    \"applicationId\": \"\",\r\n    \"loanStatus\": \"\",\r\n    \"applicationYear\": \"2025\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans?sortBy=submissionDate&sortOrder=asc",
+									"protocol": "https",
+									"host": [
+										"a8fcbf71-9a93-43f6-ab3c-b95b953b1c57",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"search-loans"
+									],
+									"query": [
+										{
+											"key": "sortBy",
+											"value": "submissionDate"
+										},
+										{
+											"key": "sortOrder",
+											"value": "asc"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "{\r\n  \"status\": \"success\",\r\n  \"applications\": [\r\n    {\r\n      \"applicationId\": \"APPID2025XYZ890\",\r\n      \"customerName\": \"John Doe\",\r\n      \"loanType\": \"Home Loan\",\r\n      \"status\": \"Approved\",\r\n      \"amount\": 250000,\r\n      \"submittedBy\": \"Officer A\",\r\n      \"submissionDate\": \"2025-01-20\",\r\n      \"branchCode\": \"BR001\"\r\n    },\r\n    {\r\n      \"applicationId\": \"APPID2025XYZ891\",\r\n      \"customerName\": \"Jane Smith\",\r\n      \"loanType\": \"Car Loan\",\r\n      \"status\": \"Rejected\",\r\n      \"amount\": 90000,\r\n      \"submittedBy\": \"Officer B\",\r\n      \"submissionDate\": \"2025-06-10\",\r\n      \"branchCode\": \"BR002\"\r\n    },\r\n    {\r\n      \"applicationId\": \"APPID2025XYZ892\",\r\n      \"customerName\": \"Jane Austin\",\r\n      \"loanType\": \"Personal Loan\",\r\n      \"status\": \"Pending\",\r\n      \"amount\": 90000,\r\n      \"submittedBy\": \"Officer B\",\r\n      \"submissionDate\": \"2025-09-11\",\r\n      \"branchCode\": \"BR002\"\r\n    }\r\n  ]\r\n}\r\n"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "authToken",
+			"value": ""
+		}
+	]
+}
