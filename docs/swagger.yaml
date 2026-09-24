@@ -5,7 +5,6 @@ info:
   version: 1.0.0
 servers:
   - url: https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/
-    description: Postman Mock Server  
 
 paths:
   /auth/login:
