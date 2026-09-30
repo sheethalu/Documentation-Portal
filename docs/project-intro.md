@@ -25,8 +25,7 @@ Filtering by application status is constrained to three supported statuses: `App
 **Search**
 - `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans`
 
-**Dropdown**
-- `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/dropdown/filters`
+**Dropdown** - `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/dropdown/filters`
 
 ## Repository & Information Architecture
 
