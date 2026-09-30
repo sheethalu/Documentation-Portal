@@ -1,10 +1,32 @@
-# Overview & Getting Started
+# Overview
 
-## Purpose
+The Loan Search API is organized around REST. It provides internal backend services for dashboard applications to query loan records, populate search filters, and authenticate administrative sessions.
 
-This API lets a loan officer search existing loan applications using simple search filters (acknowledgement number, reference number, application ID, loan status, year).
+The API accepts JSON-encoded request bodies, returns standard JSON responses, and uses predictable HTTP response codes, verbs, and JWT authentication.
 
 **Base URL:** `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/`
+
+## UI Expectations and Filters (Business Rules)
+To ensure consistent data querying across dashboard applications, search parameters adhere to strict validation logic. Client applications can query application records using three primary text identifiers: `Acknowledgement Number`, `Reference Number`, and `Application ID`. These fields accept 1–15 case-insensitive alphanumeric characters.
+
+Filtering by application status is constrained to three supported statuses: `Approved`, `Pending`, and `Rejected`. For Year filters, the system defaults to `2026`, but also allows querying records from previous two consecutive years `2024` and `2025`. Result sets can be sorted in ascending or descending order by Submission Date, Amount, or Customer Name. 
+
+### Search results table fields
+
+| Application ID  | Customer Name | Loan Type | Status   | Amount | Submitted By | Submission Date | Branch Code |
+| --------------- | ------------- | --------- | -------- | ------ | ------------ | --------------- | ----------- |
+| APPID2025XYZ001 | John Doe      | Home Loan | Approved | 250000 | Officer A    | 2025-01-20      | BR001       |
+
+## Endpoints
+
+**Login- Auth**
+- `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/auth/login`
+
+**Search loans**
+- `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans`
+
+**Dropdown options**
+- `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io//dropdown/filters`
 
 ## Repository & Information Architecture
 
@@ -35,41 +57,3 @@ Documentation-Portal/
 └── mkdocs.yml              # Site navigation & plugin configuration
 
 ```
-
-## What you need
-
-- A tool to make HTTP requests (Postman).
-- For this mock, **authentication** is required.
-
-## Authentication
-
-Auth uses JSON Web Tokens (JWT) sent in the Authorization header: `Authorization: Bearer <access_token>.`
-
-## UI Expectations and Filters (Business Rules)
-
-- Three text inputs (Acknowledgement Number, Reference Number, Application Id).
-- **Acknowledgement Number**: 1–15 alphanumeric (case-insensitive). Anything else → *Invalid Acknowledgement Number*.  
-- **Reference Number**: 1–15 alphanumeric (case-insensitive). Anything else → *Invalid Reference Number*.  
-- **Application Id**: 1–15 alphanumeric (case-insensitive). Anything else → *Invalid Application ID*.  
-- Two dropdowns (Loan Status, Application Year).
-- **Loan Status**: one of `Approved`,`Pending`, `Rejected`.
-- Application Year is auto-selected to current year (2026) and a mandatory field.
-- **Application Year**: **(Required)** Allowed: `2024`, `2025`, `2026`. Default UI value: `2026`.
-- **Sorting**: Results can be sorted in Ascending or Descending order. Primary sort fields include Submission Date, Amount, and Customer Name.
-
-### Search results table fields
-
-| Application ID  | Customer Name | Loan Type | Status   | Amount | Submitted By | Submission Date | Branch Code |
-| --------------- | ------------- | --------- | -------- | ------ | ------------ | --------------- | ----------- |
-| APPID2025XYZ001 | John Doe      | Home Loan | Approved | 250000 | Officer A    | 2025-01-20      | BR001       |
-
-## Endpoints
-
-**Login- Auth**
-- `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/auth/login`
-
-**Search loans**
-- `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/search-loans`
-
-**Dropdown options**
-- `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io//dropdown/filters`

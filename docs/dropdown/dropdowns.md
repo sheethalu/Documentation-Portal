@@ -6,7 +6,14 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 - Short one-line description
 - Positive and negative cases for: Request type, Request body, Response body, Status code
 
-<swagger-ui src="https://sheethalu.github.io/Documentation-Portal/swagger.yaml" filter="dropdown"></swagger-ui>
+Before a user can search or filter loan applications in the dashboard, the frontend application calls this endpoint to populate the filter menus. It returns the pre-defined reference options for loan status flags and submission years.
+
+## Dropdown options
+- **URL:** `/dropdown/filters`  
+- **Method:** `GET`  
+- **Description:** This API will returns the loan application status and application year dropdown options that is available in the search filter. Positive case returns 200 OK.
+
+<swagger-ui src="https://sheethalu.github.io/Documentation-Portal/swagger.yaml" filter="Dropdown"></swagger-ui>
 
 ## DROPDOWN API – SCHEMAS
 
@@ -19,13 +26,12 @@ All request and response bodies are JSON unless otherwise stated. For each endpo
 
 **Dropdown Response**
 
-loanStatus: `array<LoanStatus>`  
-applications: `array<ApplicationYear>`  
+```yaml
 
-## Dropdown options
-- **URL:** `/dropdown/filters`  
-- **Method:** `GET`  
-- **Description:** This API will returns the loan application status and application year dropdown options that is available in the search filter. Positive case returns 200 OK.
+loanStatus: `array<LoanStatus>`  
+applications: `array<ApplicationYear>`
+
+```
 
 ### Example
 
