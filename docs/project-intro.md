@@ -9,7 +9,7 @@ The API accepts JSON-encoded request bodies, returns standard JSON responses, an
 ## UI Expectations and Filters (Business Rules)
 To ensure consistent data querying across dashboard applications, search parameters adhere to strict validation logic. Client applications can query application records using three primary text identifiers: `Acknowledgement Number`, `Reference Number`, and `Application ID`. These fields accept 1–15 case-insensitive alphanumeric characters.
 
-Filtering by application status is constrained to three supported statuses: `Approved`, `Pending`, and `Rejected`. For Year filters, the system defaults to `2026`, but also allows querying records from previous two consecutive years `2024` and `2025`. Result sets can be sorted in ascending or descending order by Submission Date, Amount, or Customer Name. 
+Filtering by application status is constrained to three supported statuses: `Approved`, `Pending`, and `Rejected`. For Year filters, the system defaults to `2026`, but also allows querying records from previous two consecutive years `2024` and `2025`. Result sets can be sorted in ascending or descending order by Submission Date, Amount, or Customer Name.
 
 ### Search results table fields
 
