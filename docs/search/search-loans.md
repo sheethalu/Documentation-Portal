@@ -1,24 +1,27 @@
 # Endpoint reference (detailed)
 
-All request and response bodies are JSON unless otherwise stated. For each endpoint below you'll find:
+This endpoint helps loan staff find application records using relevant filters and sorting options. It supports reviewing applications by acknowledgment number, application ID, status, reference number, and application year. Staff can sort the results by submission date, amount, or customer name in ascending or descending order. These search and sorting capabilities help staff compare records and complete loan review workflows efficiently.
 
-- API path
-- Short one-line description
-- Positive and negative cases for: Request type, Request body, Response body, Status code
+## Search loan applications
+- **URL:** `/search-loans`
+- **Method:** `POST`
+- **Authentication:** `Bearer <token>` (JWT) required in the `Authorization` header
+- **Content-Type:** `application/json`
+- **Description:** Searches loan applications using request-body filters and optional query parameters. Returns `200 OK` with matching records, `400 Bad Request` for invalid input, or `404 Not Found` when no records match.
 
 <swagger-ui src="https://sheethalu.github.io/Documentation-Portal/swagger.yaml" filter="Search"></swagger-ui>
 
-## Search Api – SCHEMAS
+## SEARCH API – SCHEMAS
 
 **Model: SearchRequest**
 
-| Field                | Type   | Required  | Description                              |
-|----------------------|--------|-----------|------------------------------------------|
-| acknowledgmentNumber | string | no        | 1–15 alphanumeric, case-insensitive      |
-| referenceNumber      | string | no        | 1–15 alphanumeric, case-insensitive      |
-| applicationId        | string | no        | 1–15 alphanumeric, case-insensitive      |
-| loanStatus           | string | no        | One of: Approved, Pending, Rejected      |
-| applicationYear      | number | yes       | Allowed: 2024, 2025, 2026. Default: 2026 |
+| Field                | Type    | Required | Constraints                              | Description                         |
+| -------------------- | ------- | -------- | ---------------------------------------- | ----------------------------------- |
+| acknowledgmentNumber | string  | No       | 1–15 alphanumeric, case-insensitive                    | Acknowledgment number filter.       |
+| applicationID           | string  | No       | 1–15 alphanumeric, case-insensitive     | Application ID filter.                 |
+| referenceNumber      | string  | No       | 1–15 alphanumeric, case-insensitive         | Reference number filter.            |
+| applicationYear      | integer | Yes      | `2024`, `2025`, or `2026`; default `2026` | Application year filter.           |
+| loanStatus           | string  | No       | `Approved`, `Pending`, or `Rejected`     | Loan status filter.                 |
 
 **SearchRequest**
 
@@ -28,56 +31,59 @@ applicationId: `string (1–15 alphanumeric)`
 loanStatus: `string (enum: Approved, Pending, Rejected)`  
 applicationYear: `number (required, enum: 2024 | 2025 | 2026; default=2026)`  
 
+**Query parameters**
+
+| Parameter | Type   | Required | Constraints                                      | Description                |
+| --------- | ------ | -------- | ------------------------------------------------ | -------------------------- |
+| sortBy    | string | No       | `submissionDate`, `amount`, or `customerName`    | Field used to sort results. |
+| sortOrder | string | No       | `asc` or `desc`; default `desc`                  | Sort direction.             |
 
 **Model: SearchResponse**
 
-| Field        | Type                     | Description                                      |
-|--------------|--------------------------|--------------------------------------------------|
-| status       | string                   | Response status.                                 |
-| applications | array<ApplicationRecord> | List of loan applications matching the criteria. |
+| Field        | Type                     | Description                                  |
+| ------------ | ------------------------ | -------------------------------------------- |
+| status       | string                   | Search result status.                         |
+| applications | array<ApplicationRecord> | Matching loan application records.           |
 
+**SearchResponse**
+```yaml
+status: `string`
+applications: `array<ApplicationRecord>`
+```
 
 **Model: ApplicationRecord**
 
-| Field          | Type                | Description                               |
-|----------------|---------------------|-------------------------------------------|
-| applicationId  | string              | Unique ID of the loan application.        |
-| customerName   | string              | Customer’s full name.                     |
-| loanType       | string              | Type of loan (e.g., Home Loan).           |
-| status         | string              | Application status.                       |
-| amount         | number              | Loan amount approved/requested.           |
-| submittedBy    | string              | Loan officer who created the application. |
-| submissionDate | string (YYYY-MM-DD) | Date of submission.                       |
-| branchCode     | string              | Branch identifier.                        |
+| Field          | Type   | Description                                |
+| -------------- | ------ | ------------------------------------------ |
+| applicationId  | string | Unique loan application identifier.         |
+| customerName   | string | Customer’s full name.                       |
+| loanType       | string | Type of loan.                               |
+| status         | string | Current application status.                 |
+| amount         | number | Loan amount requested or approved.          |
+| submittedBy    | string | Officer who submitted the application.      |
+| submissionDate | string | Submission date in `YYYY-MM-DD` format.     |
+| branchCode     | string | Branch identifier.                          |
 
+**ApplicationRecord**
 
-**SearchResponse**
+```yaml
+applicationId: `string`
+customerName: `string`
+loanType: `string`
+status: `string`
+amount: `number`
+submittedBy: `string`
+submissionDate: `string (date)`
+branchCode: `string`
+```
 
-status: `string`  
-applications: `array<ApplicationRecord>`  
+### Scenario A:  Search-loan
 
-
-ApplicationRecord:  
-  applicationId: `string`  
-  customerName: `string`  
-  loanType: `string`  
-  status: `string`  
-  amount: `number`  
-  submittedBy: `string`  
-  submissionDate: `string (YYYY-MM-DD)`  
-  branchCode: `string`  
-
-## Search loan applications
-- **URL:** `/search-loans`  
-- **Method:** `POST`  
-- **Description:** This API will fetch the loan application details that match the provided criteria or filters applied. Positive case returns 200 OK.Negative cases: returns (400 Bad Request).
-
-### Examples
+The following section details the validated test scenarios for the loan search and filtering endpoint, including request payloads, response codes, and verified results..
 
 **TC005.2 - Invalid Ack Num (Alphabet Only)**
 
 **Request:**
-
 ```json
 {
     "acknowledgementNumber": "BsdthYTIJHFDSAA",
@@ -86,9 +92,8 @@ ApplicationRecord:
     "loanStatus": "",
     "applicationYear": 2025
 }
-```
-**Response:**
-
+``
+**Response: `400 Bad Request`**
 ```json
 {
   "status": "error",
@@ -98,10 +103,9 @@ ApplicationRecord:
 ```
 ![TC005.2](image.png)
 
-**TC005.6 - Invalid Ack Num (Too Short)**
+**TC005.6 – Acknowledgment number shorter than 15 characters**
 
 **Request:**
-
 ```json
 {
     "acknowledgementNumber": "ACK12345",
@@ -111,8 +115,7 @@ ApplicationRecord:
     "applicationYear": 2025
 }
 ```
-**Response:**
-
+**Response: `400 Bad Request`**
 ```json
 {
   "status": "error",
@@ -125,7 +128,6 @@ ApplicationRecord:
 **TC006.3 - Invalid Ref Num (Numeric Only)**
 
 **Request**
-
 ```json
 {
     "acknowledgementNumber": "",
@@ -135,8 +137,7 @@ ApplicationRecord:
     "applicationYear": 2025
 }
 ```
-**Response:**
-
+**Response: `400 Bad Request`**
 ```json
 {
   "status": "error",
@@ -149,7 +150,6 @@ ApplicationRecord:
 **TC006.6 - Invalid Ref Num (Too Short)**
 
 **Request**
-
 ```json
 {
     "acknowledgementNumber": "",
@@ -159,8 +159,7 @@ ApplicationRecord:
     "applicationYear": 2025
 }
 ```
-**Response:**
-
+**Response: `400 Bad Request`**
 ```json
 {
   "status": "error",
@@ -173,7 +172,6 @@ ApplicationRecord:
 **TC007.3 - Invalid Application ID (Numeric only)**
 
 **Request:**
-
 ```json
 {
   "acknowledgementNumber": "",
@@ -183,8 +181,7 @@ ApplicationRecord:
   "applicationYear": 2025
 }
 ```
-**Response:**
-
+**Response: `400 Bad Request`**
 ```json
 {
   "status": "error",
@@ -197,7 +194,6 @@ ApplicationRecord:
 **TC007.6 - Invalid Application ID (Too short)**
 
 **Request:**
-
 ```json
 {
   "acknowledgementNumber": "",
@@ -207,8 +203,7 @@ ApplicationRecord:
   "applicationYear": 2025
 }
 ```
-**Response:**
-
+**Response: `400 Bad Request`**
 ```json
 {
   "status": "error",
@@ -221,7 +216,6 @@ ApplicationRecord:
 **TC016 - Mandatory Application Year**
 
 **Request:**
-
 ```json
 {
     "acknowledgementNumber": "",
@@ -231,8 +225,7 @@ ApplicationRecord:
     "applicationYear": "2025"
 }
 ```
-**Response:**
-
+**Response: `200 OK`**
 ```json
 {
   "status": "success",
@@ -275,7 +268,6 @@ ApplicationRecord:
 **TC017 – No Record Found (Valid IDs + Invalid Loan Status)**
 
 **Request:**
-
 ```json
 {
   "acknowledgementNumber": "ACK1234567890XY",
@@ -285,8 +277,7 @@ ApplicationRecord:
   "applicationYear": 2025
 }
 ```
-**Response(404 Not Found):**
-
+**Response: `404 Not Found`**
 ```json
 {
   "status": "not_found",
@@ -297,8 +288,8 @@ ApplicationRecord:
 ![TC017](image-7.png)
 
 **TC018 - Success (Valid IDs + Status)**
-**Request:**
 
+**Request:**
 ```json
 {
   "acknowledgementNumber": "ACK1234567890XY",
@@ -308,8 +299,7 @@ ApplicationRecord:
   "applicationYear": 2025
 }
 ```
-**Response(200 OK):**
-
+**Response: `200 OK`**
 ```json
 {
   "status": "success",
@@ -332,7 +322,6 @@ ApplicationRecord:
 **Missing Mandatory Field - applicationYear**
 
 **Request:**
-
 ```json
 {
     "acknowledgementNumber": "",
@@ -343,7 +332,6 @@ ApplicationRecord:
 }
 ```
 **Response:**
-
 ```json
 {
   "error": "Missing mandatory field",
@@ -353,3 +341,113 @@ ApplicationRecord:
 ```
 ![Missing Mandatory Field - applicationYear](image-9.png)
 
+**Sorting - Descending**
+
+The examples below demonstrate how sorting query parameters (sortBy and sortOrder) alter the returned data set. Included are representative JSON request payloads, expected `200 OK` responses showing results ordered in ascending (asc) and descending (desc) sequence.
+
+**Request URL:** `/search-loans?sortBy=submissionDate&sortOrder=desc`
+
+**Request:**
+```json
+{
+    "acknowledgementNumber": "",
+    "referenceNumber": "",
+    "applicationId": "",
+    "loanStatus": "",
+    "applicationYear": "2025"
+}
+```
+**Response:**
+```json
+{
+  "status": "success",
+  "applications": [
+    {
+      "applicationId": "APPID2025XYZ892",
+      "customerName": "Jane Austin",
+      "loanType": "Personal Loan",
+      "status": "Pending",
+      "amount": 90000,
+      "submittedBy": "Officer B",
+      "submissionDate": "2025-09-11",
+      "branchCode": "BR002"
+    },
+      {
+      "applicationId": "APPID2025XYZ891",
+      "customerName": "Jane Smith",
+      "loanType": "Car Loan",
+      "status": "Rejected",
+      "amount": 90000,
+      "submittedBy": "Officer B",
+      "submissionDate": "2025-06-10",
+      "branchCode": "BR002"
+    },
+    {
+      "applicationId": "APPID2025XYZ890",
+      "customerName": "John Doe",
+      "loanType": "Home Loan",
+      "status": "Approved",
+      "amount": 250000,
+      "submittedBy": "Officer A",
+      "submissionDate": "2025-01-20",
+      "branchCode": "BR001"
+    }
+  ]
+}
+
+```
+**Sorting - Ascending**
+
+**Request URL:** `/search-loans?sortBy=submissionDate&sortOrder=asc`
+
+**Request:**
+```json
+{
+    "acknowledgementNumber": "",
+    "referenceNumber": "",
+    "applicationId": "",
+    "loanStatus": "",
+    "applicationYear": "2025"
+}
+```
+**Response:**
+
+```json
+
+{
+  "status": "success",
+  "applications": [
+    {
+      "applicationId": "APPID2025XYZ890",
+      "customerName": "John Doe",
+      "loanType": "Home Loan",
+      "status": "Approved",
+      "amount": 250000,
+      "submittedBy": "Officer A",
+      "submissionDate": "2025-01-20",
+      "branchCode": "BR001"
+    },
+    {
+      "applicationId": "APPID2025XYZ891",
+      "customerName": "Jane Smith",
+      "loanType": "Car Loan",
+      "status": "Rejected",
+      "amount": 90000,
+      "submittedBy": "Officer B",
+      "submissionDate": "2025-06-10",
+      "branchCode": "BR002"
+    },
+    {
+      "applicationId": "APPID2025XYZ892",
+      "customerName": "Jane Austin",
+      "loanType": "Personal Loan",
+      "status": "Pending",
+      "amount": 90000,
+      "submittedBy": "Officer B",
+      "submissionDate": "2025-09-11",
+      "branchCode": "BR002"
+    }
+  ]
+}
+
+```

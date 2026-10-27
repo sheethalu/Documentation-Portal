@@ -35,6 +35,8 @@ nav:
     - Sorting: sorting/sorting.md
     - Dropdowns: dropdown/dropdowns.md
     - Error Codes: errors/errors.md
+  - AI-Assisted Workflows:  
+    - JavaDoc Agent Skill:
   - Resources & Downloads: resources.md
   - OpenAPI Spec: swagger.yaml
 

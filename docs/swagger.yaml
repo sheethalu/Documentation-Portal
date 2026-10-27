@@ -29,8 +29,9 @@ paths:
     post:
       tags:
         - Search
-        - Sorting
       summary: Search and sort loan applications
+      security:
+        - BearerAuth: []
       parameters:
         - name: sortBy
           in: query
@@ -69,7 +70,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/SearchResponse'    
+                $ref: '#/components/schemas/ErrorResponse'    
   /dropdown/filters:
     get:
       tags:
@@ -79,6 +80,11 @@ paths:
         '200':
           description: OK
 components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     AuthRequest:
       type: object
