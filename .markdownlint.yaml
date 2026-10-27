@@ -9,3 +9,4 @@ MD032: false # Lists should be surrounded by blank lines
 MD033: false # Allow inline HTML for rendering custom UI elements like <swagger-ui>
 MD036: false # Emphasis used instead of heading
 MD047: false # Files should end with a single newline character
+MD060: false # Disallow inline HTML
