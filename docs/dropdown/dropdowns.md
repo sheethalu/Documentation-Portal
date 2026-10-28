@@ -1,16 +1,12 @@
 # Endpoint reference (detailed)
 
-All request and response bodies are JSON unless otherwise stated. For each endpoint below you'll find:
-
-- API path
-- Short one-line description
-- Positive and negative cases for: Request type, Request body, Response body, Status code
-
 Before a user can search or filter loan applications in the dashboard, the frontend application calls this endpoint to populate the filter menus. It returns the pre-defined reference options for loan status flags and submission years.
 
 ## Dropdown options
 - **URL:** `/dropdown/filters`  
 - **Method:** `GET`  
+- **Authentication:** `Bearer <token>` (JWT) required in `Authorization` header
+- **Content-Type:** `application/json`
 - **Description:** This API will returns the loan application status and application year dropdown options that is available in the search filter. Positive case returns 200 OK.
 
 <swagger-ui src="https://sheethalu.github.io/Documentation-Portal/swagger.yaml" filter="Dropdown"></swagger-ui>
