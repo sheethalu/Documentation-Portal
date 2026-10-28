@@ -46,7 +46,7 @@ applicationYear: `number (required, enum: 2024 | 2025 | 2026; default=2026)`
 | applications | array<ApplicationRecord> | Matching loan application records.           |
 
 **SearchResponse**
-```yaml
+```json
 status: `string`
 applications: `array<ApplicationRecord>`
 ```
@@ -66,7 +66,7 @@ applications: `array<ApplicationRecord>`
 
 **ApplicationRecord**
 
-```yaml
+```json
 applicationId: `string`
 customerName: `string`
 loanType: `string`
@@ -341,9 +341,11 @@ The following section details the validated test scenarios for the loan search a
 ```
 ![Missing Mandatory Field - applicationYear](image-9.png)
 
-**Sorting - Descending**
+### Scenario B:  Sorting
 
 The examples below demonstrate how sorting query parameters (sortBy and sortOrder) alter the returned data set. Included are representative JSON request payloads, expected `200 OK` responses showing results ordered in ascending (asc) and descending (desc) sequence.
+
+**Sorting - Descending**
 
 **Request URL:** `/search-loans?sortBy=submissionDate&sortOrder=desc`
 
@@ -396,6 +398,7 @@ The examples below demonstrate how sorting query parameters (sortBy and sortOrde
 }
 
 ```
+
 **Sorting - Ascending**
 
 **Request URL:** `/search-loans?sortBy=submissionDate&sortOrder=asc`
@@ -411,9 +414,7 @@ The examples below demonstrate how sorting query parameters (sortBy and sortOrde
 }
 ```
 **Response:**
-
 ```json
-
 {
   "status": "success",
   "applications": [
@@ -449,5 +450,4 @@ The examples below demonstrate how sorting query parameters (sortBy and sortOrde
     }
   ]
 }
-
 ```
