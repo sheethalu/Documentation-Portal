@@ -33,7 +33,7 @@ nav:
     - Authentication: auth/login.md
     - Search: search/search-loans.md
     - Dropdowns: dropdown/dropdowns.md
-    - Error Codes: docs/errors/errors.md
+    - Error Codes: errors/errors.md
   - Resources & Downloads: resources.md
   - OpenAPI Spec: swagger.yaml
 
