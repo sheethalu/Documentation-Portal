@@ -30,11 +30,11 @@ nav:
   - Welcome: index.md
   - Project Overview: project-intro.md
   - API Reference:
-    - Authentication: docs/auth/login.md
-    - Search: docs/search/search-loans.md
-    - Sorting: docs/sorting/sorting.md
-    - Dropdowns: docs/dropdown/dropdowns.md
-    - Error Codes: docs/errors/errors.md
+    - Authentication: auth/login.md
+    - Search: search/search-loans.md
+    - Sorting: sorting/sorting.md
+    - Dropdowns: dropdown/dropdowns.md
+    - Error Codes: errors/errors.md
   - Resources & Downloads: resources.md
   - OpenAPI Spec: swagger.yaml
 
