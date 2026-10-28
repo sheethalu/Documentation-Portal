@@ -10,7 +10,7 @@ paths:
   /auth/login:
     post:
       tags:
-      - Authentication
+        - Authentication
       summary: User Authentication
       requestBody:
         required: true
