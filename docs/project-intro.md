@@ -7,6 +7,7 @@ The API accepts JSON-encoded request bodies, returns standard JSON responses, an
 **Base URL:** `https://a8fcbf71-9a93-43f6-ab3c-b95b953b1c57.mock.pstmn.io/`
 
 ## API Reference
+
 To ensure consistent data querying across dashboard applications, search parameters adhere to strict validation logic. Client applications can query application records using three primary text identifiers: `Acknowledgement Number`, `Reference Number`, and `Application ID`. These fields accept 1–15 case-insensitive alphanumeric characters.
 
 Filtering by application status is constrained to three supported statuses: `Approved`, `Pending`, and `Rejected`. For Year filters, the system defaults to `2026`, but also allows querying records from previous two consecutive years `2024` and `2025`. Result sets can be sorted in ascending or descending order by Submission Date, Amount, or Customer Name.
@@ -61,15 +62,18 @@ Documentation-Portal/
 ```
 
 ### Docs-As-Code & AI-Assisted Workflow
+
 To accelerate delivery while maintaining production-grade accuracy, this portal leverages a custom **AI Agent Governance Framework** (`SKILL.md` + OpenAPI contracts):
+
 - The agent cross-references error rules (`errors.md`) and strict OpenAPI schemas (`swagger.yaml`), completely eliminating hallucinated error codes.
 - Automated markdown/JSON linting combined with mandatory manual review ensures clean layout consistency before deployment to GitHub Pages.
 
-#### Workflow Comparison: AI Draft vs. Final Polish
+### Workflow Comparison: AI Draft vs. Final Polish
+
 To demonstrate the human-in-the-loop refinement process:
-1. **Raw AI Skeleton (`search-test.md`):** Generated via repository agent rules to instantly establish parameter and error tables.
+- **Raw AI Skeleton (`search-test.md`):** Generated via repository agent rules to instantly establish parameter and error tables.
 
-   ![AI Draft Skeleton](../portfolio-assets/images/ai-draft.png)
+   ![AI Draft](/portfolio-assets/images/ai-draft.png)
 
-2. **Production-Ready Output:** The final polished page deployed to the live portal.
+- **Production-Ready Output:** The final polished page deployed to the live portal.
     *[View the live search-loans.md documentation page in production →]([https://sheethalu.github.io/Documentation-Portal/search/search-loans/])*

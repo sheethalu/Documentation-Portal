@@ -31,9 +31,9 @@ nav:
   - Project Overview: project-intro.md
   - API Reference:
     - Authentication: auth/login.md
-    - Search: search/search-loans.md
     - Dropdowns: dropdown/dropdowns.md
-    - Error Codes: errors/errors.md
+    - Search: search/search-loans.md
+    - Error Codes: error-codes/errors.md
   - Resources & Downloads: resources.md
   - OpenAPI Spec: swagger.yaml
 
