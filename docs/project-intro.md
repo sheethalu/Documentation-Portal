@@ -71,9 +71,10 @@ To accelerate delivery while maintaining production-grade accuracy, this portal 
 ### Workflow Comparison: AI Draft vs. Final Polish
 
 To demonstrate the human-in-the-loop refinement process:
+
 - **Raw AI Skeleton (`search-test.md`):** Generated via repository agent rules to instantly establish parameter and error tables.
 
-   ![AI Draft](docs/portfolio-assets/images/ai-draft.png)
+   ![AI Draft](portfolio-assets/images/ai-draft.png)
 
 - **Production-Ready Output:** The final polished page deployed to the live portal.
     *[View the live search-loans.md documentation page in production →](https://sheethalu.github.io/Documentation-Portal/search/search-loans/)*
