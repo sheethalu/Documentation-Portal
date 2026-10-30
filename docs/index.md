@@ -35,7 +35,7 @@ This repository implements a fully automated documentation and testing pipeline:
 | **API Contract** | OpenAPI 3.0 (`swagger.yaml`) | Single source of truth for endpoints (`/auth/login`, `/search-loans`, `/dropdown/filters`) with integrated Swagger UI. |
 | **CI/CD Pipeline** | GitHub Actions | Automatically builds and deploys documentation to GitHub Pages on every `git push`. |
 | **Quality Control** | Pre-Commit Hooks | Automated linting and syntax validation preventing broken specs before code is committed. |
-| **Workflow Automation** | VS Code Agent Skills (`SKILL.md`) | Custom rules and instructions configured to guide AI-assisted documentation and schema generation. |
+| **AI Workflow** | VS Code AI workflow (`SKILL.md`) | Custom rules and instructions configured to guide AI-assisted documentation and schema generation. |
 | **QA & Testing** | Postman Collections & Test Cases | Executable integration test suites, mock environments, and negative test matrices. |
 
 ---

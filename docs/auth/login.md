@@ -79,7 +79,7 @@ roles: `array[string]`
 ```json
 {
   "status": "error",
-  "errorCode": "INVALID_INPUT",
+  "errorCode": "ERR_INVALID_INPUT",
   "message": "username and password are required"
 }
 ```
@@ -88,7 +88,7 @@ roles: `array[string]`
 ```json
 {
   "status": "error",
-  "errorCode": "ERR_INVALID_CREDENTIALS",
+  "errorCode": "ERR_INVALID_CRED",
   "message": "Invalid username or password."
 }
 ```
@@ -97,7 +97,7 @@ roles: `array[string]`
 ```json
 {
   "status": "error",
-  "errorCode": "AUTH_SERVER_ERROR",
+  "errorCode": "ERR_500",
   "message": "Authentication service unavailable."
 }
 ```
