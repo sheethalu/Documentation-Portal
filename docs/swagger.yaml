@@ -127,14 +127,24 @@ components:
           type: string
           minLength: 15
           maxLength: 15
+          pattern: '^[a-zA-Z0-9]+$'
           example: "ACK1234567890XY"
+        referenceNumber:
+          type: string 
+          minLength: 15
+          maxLength: 15
+          pattern: '^[a-zA-Z0-9]+$'
+          example: "REF2025XYZ89012"
+        applicationId:
+          type: string
+          minLength: 15
+          maxLength: 15
+          pattern: '^[a-zA-Z0-9]+$'
+          example: "APPID2025XYZ001"
         loanStatus:
           type: string
           enum: [Approved, Pending, Rejected]
-          example: "Pending"
-        referenceNumber:
-          type: string 
-          example: "REF2025XYZ89012"
+          example: "Pending" 
         applicationYear:
           type: integer
           default: 2026  # pre-select 2026
@@ -181,13 +191,24 @@ components:
           example: "BR001"
     ErrorResponse:
       type: object
+      required:
+        - status
+        - errorCode
+        - message
       properties: 
         status:
           type: string
           example: "error"
         errorCode:
           type: string
-          example: "INVALID_INPUT"
+          description: "Standardized error code following the dynamic ERR_INVALID_[FIELD] pattern and two other patterns ERR_402 and ERR_MIS_APPYR."
+          enum:
+            - ERR_INVALID_ACK
+            - ERR_INVALID_REF
+            - ERR_INVALID_APPID
+            - ERR_402
+            - ERR_MIS_APPYR
+          example: "ERR_MIS_APPYR"
         message:
           type: string
           example: "Application Year is required"

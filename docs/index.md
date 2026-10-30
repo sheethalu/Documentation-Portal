@@ -1,26 +1,48 @@
-# API Documentation Portfolio
-by Sheethal U — Technical Writer | Manual QA
+# API Documentation & QA Engineering Portfolio
 
-## Welcome to my API Documentation Portfolio
+> **Bridging rigorous API testing with Docs-as-Code and AI-ready workflows.**
+
+## Welcome
+Hi, I am Sheethal U, a **Quality Assurance and Technical Writing professional** specializing in API validation, automated documentation pipelines, and developer experience (DX).
+
 This repository showcases a collection of well-structured, tested and developer-friendly API documentations written in Markdown.
 
-### About Me
-I’m Sheethal U, a Manual QA Engineer and technical writer specializing in Manual QA, API Testing, API documentation, and developer manuals.
+---
 
-## Portfolio Projects
-Below folder contains a Markdown documentation (README.md), Test cases, Postman collection, and Postman documentation for a specific API or developer use case.
+## Professional Background
 
-| Folder                                                                                                    | Description                                                                            |
-| --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| [api-docs](https://github.com/sheethalu/search-loan-application/tree/main/api-docs)                       | Source directory containing endpoint specifications, error schemas, and QA validations |
-| [live-portal](https://sheethalu.github.io/Documentation-Portal/)                                          | Interactive developer portal built using MkDocs and deployed via GitHub Pages          |
-| [postman-collections](https://github.com/sheethalu/search-loan-application/tree/main/postman-collections) | API with login and search endpoints                                                    |
-| [test-cases](https://github.com/sheethalu/search-loan-application/tree/main/test-cases)                   | Test cases for Search API endpoint                                                     |
+Throughout my career in software quality assurance—including extensive work verifying core backend systems, APIs, and portal releases—my responsibilities naturally extended beyond traditional test execution.
 
-## Tools & Formats
-All documentation written in:
+By authoring technical functional documents, managing release communications, and collaborating closely with engineering teams. I have leveraged this intersection of **QA and technical writing** to build robust, error-free API specifications and interactive documentation portals that bridge the gap between complex backend logic and seamless user adoption.
 
-- Markdown (.md)
-- REST & JSON examples
-- Consistent structure: Overview → Auth → Endpoints → Errors → Examples
-- Optional: Test cases, Postman collection, and Postman examples
+---
+
+## Core Competencies & Skill Stack
+
+* **Docs-as-Code Methodologies:** Structuring documentation in Markdown (`.md`), version-controlled via Git, and published through automated CI/CD pipelines.
+* **API Validation & QA:** Hands-on experience in OpenAPI 3.0 specifications, Postman collection validation, SQL backend verification, JWT authorization workflows, and negative test matrices.
+* **Developer Experience (DX):** Designing intuitive onboarding paths, clear reference manuals, and standardized error governance to minimize integration friction.
+
+---
+
+## Repository Structure & Tooling
+
+This repository implements a fully automated documentation and testing pipeline:
+
+| Component | Technology / Tooling | Purpose & Implementation |
+| :--- | :--- | :--- |
+| **Portal Engine** | MkDocs (Material Theme) | Generates a responsive, searchable developer portal with dark mode and custom tabs[cite: 6]. |
+| **API Contract** | OpenAPI 3.0 (`swagger.yaml`) | Single source of truth for endpoints (`/auth/login`, `/search-loans`, `/dropdown/filters`) with integrated Swagger UI. |
+| **CI/CD Pipeline** | GitHub Actions | Automatically builds and deploys documentation to GitHub Pages on every `git push`[cite: 6]. |
+| **Quality Control** | Pre-Commit Hooks | Automated linting and syntax validation preventing broken specs before code is committed. |
+| **Workflow Automation** | VS Code Agent Skills (`SKILL.md`) | Custom rules and instructions configured to guide AI-assisted documentation and schema generation. |
+| **QA & Testing** | Postman Collections & Test Cases | Executable integration test suites, mock environments, and negative test matrices. |
+
+---
+
+## Quick Navigation
+
+* 🚀 Check out the [Project Overview]([project-intro.md](https://sheethalu.github.io/Documentation-Portal/project-intro/)) for a deep dive into the case study.
+* 📖 Explore the interactive [API Reference]([https://sheethalu.github.io/Documentation-Portal/auth/login/]).
+
+

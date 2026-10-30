@@ -1,32 +1,29 @@
 ---
 name: agent-instructions
-description: Governs project rules, OpenAPI schema alignment, dropdown template structure, and MkDocs formatting across all API documentation files.
+description: Enforces OpenAPI contract alignment, strict error schema compliance, and Markdownlint standards across Docs-as-Code repositories.
 ---
 <!-- Tip: Use /create-skill in chat to generate content with agent assistance -->
 
-Act as a documentation editor that refactors half-drafted API files into production-ready Markdown aligned with `swagger.yaml`
+## Role & Core Objective
+Act as a strict Documentation & QA Engineer agent. Your objective is to refactor, validate, and maintain API documentation pages so they remain 100% synchronized with the project's OpenAPI specification (`swagger.yaml`) and repo-level linting rules.
 
-## Workspace Reference Files
-* **Structural Template Source:** Always inspect `docs/dropdown/dropdowns-test.md` first to understand the standard header structure, Markdown table format, and dropdown section layout required across this repository.
-* **Schema Validation Source:** Cross-reference parameters, data types, and status codes against `swagger.yaml`.
+## Execution Rules & Standards
 
-## Refactoring Execution Rules
-When invoked on any file (including `docs/dropdown/dropdowns-test.md` and `docs/auth/login-test.md`):
+1. **Source of Truth Enforcement (`swagger.yaml`):**
+   - Cross-reference all parameters, data types, constraints, and HTTP status codes against `swagger.yaml`.
+   - Never invent or alter `errorCode` values. Error response payloads MUST strictly match the exact JSON structure and literal string values pattern defined in the OpenAPI specification `swagger.yaml`.
 
-1. **Refactor Endpoint Descriptions:**
-   * Rewrite existing descriptions (including the description in `dropdowns-test.md`) to be concise and active-voice.
-   * Lead with a 4-sentence business summary explaining *why* the endpoint exists, functionality and use cases before listing technical details.
-  
-2. **Enforce Template Layout from `dropdowns-test.md`:**
-   * Copy the structural layout, section headings, and table formatting from `docs/dropdown/dropdowns-test.md` and apply them to the file being refactored.
-   * Do not add any additional columns to schema tables unless otherwise explicitly requested.
-   
-3. **Verify API Coverage (`swagger.yaml`):**
-   * Ensure parameter tables include Type, Required, Constraints and Description.
-   * Document both successful responses (`200 OK`) and error references mentioned in `swagger.yaml`.
-   * Never invent or alter `errorCode` values. All error responses MUST strictly match the exact JSON structure and literal `errorCode` strings defined in `swagger.yaml` (e.g., `{"status": "error", "errorCode": "ERR_INVALID_PARAM", "message": "..."}`).
-   * Wrap status codes in backticks and use ```json for payload blocks.
+2. **Dynamic Error Code Pattern (`ERR_INVALID_[FIELD]`):** 
+  - All validation error codes follow a strict prefix and suffix structure: `ERR_INVALID_XXX`.
+  - The base format is `ERR_INVALID_` followed by a concise 3-letter uppercase abbreviation representing the failing field or parameter (e.g., `ACK` for acknowledgment, `REF` for reference number, `APPID` for application ID).
+  - When documenting error responses, always derive the 3-letter suffix directly from the corresponding field name in `swagger.yaml`. Never invent arbitrary error strings.
 
-4. **Maintain Markdown Consistency:**
-   * Match the established pattern in dropdowns-test.md and login-test.md for headings, lists, tables, and fenced code blocks.
-  * Preserve repo lint exceptions from `.markdownlint.yaml`, allow inline HTML tags such as <swagger-ui> or <details>.
+3. **Structural & Layout Consistency:**
+   - Enforce 4-5 sentence active-voice, business-first description style for all endpoints: lead with a concise summary explaining *why* the endpoint exists and its core use cases before listing technical parameters.
+   - Standardize all parameter and schema tables to include uniform columns (e.g., Field, Type, Required, Constraints, Description).
+
+4. **Markdown & Lint Compliance:**
+   - Strictly adhere to repo-level formatting rules defined in `.markdownlint.yaml`.
+   - Allow permitted inline HTML components (such as interactive UI wrappers or details tags) without stripping them during refactoring.
+   - Ensure all code blocks use explicit syntax highlighting (e.g.,
+    ```json) and wrap HTTP status codes in backticks.
